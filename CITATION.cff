@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use IMM-Core, please cite it as below."
+type: dataset
+title: "IMM-Core: Interview Metadata Model — Core Profile"
+version: "1.0"
+date-released: "2026-06-02"
+doi: "10.5281/zenodo.20507329"
+license: CC-BY-4.0
+abstract: >
+  A generic, openly published minimal metadata model for interview-based
+  qualitative research. Discipline-agnostic two-layer architecture: Core Profile
+  (generic) plus Implementation Profiles (specialisations). LuxOH-CMDI is the
+  first registered Implementation Profile.
+authors:
+  - family-names: "Behnam Shad"
+    given-names: "Klaus"
+    orcid: "https://orcid.org/0000-0002-3601-9024"
+    affiliation: "Luxembourg Centre for Contemporary and Digital History (C²DH), University of Luxembourg"
+repository-code: "https://github.com/kbehnamshad/imm-core"
+url: "https://doi.org/10.5281/zenodo.20507329"
+keywords:
+  - "interview metadata"
+  - "qualitative research"
+  - "oral history"
+  - "metadata model"
+  - "FAIR data"
+  - "GDPR"
+  - "DCTAP"
+  - "JSON Schema"
+  - "minimal metadata"

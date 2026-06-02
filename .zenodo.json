@@ -1,0 +1,46 @@
+{
+  "title": "IMM-Core: Interview Metadata Model — Core Profile",
+  "description": "A generic, openly published minimal metadata model for interview-based qualitative research. Discipline-agnostic (oral history, sociology, anthropology, education, migration studies, health research). Two-layer architecture: Core Profile (generic, 13 fields, 4 blocks) plus Implementation Profiles (specialisations). LuxOH-CMDI (C²DH, University of Luxembourg) is the first registered profile. Includes DCTAP single source of truth, JSON Schema validator, two example records, three crosswalks (Dublin Core, REFI-QDA/QDPX, Schema.org/Dataset), two worked profiles, and full conceptual documentation.",
+  "license": "cc-by-4.0",
+  "version": "1.0",
+  "upload_type": "dataset",
+  "publication_date": "2026-01-01",
+  "creators": [
+    {
+      "name": "Behnam Shad, Klaus",
+      "affiliation": "Luxembourg Centre for Contemporary and Digital History (C²DH), University of Luxembourg",
+      "orcid": "0000-0002-3601-9024"
+    }
+  ],
+  "keywords": [
+    "interview metadata",
+    "qualitative research",
+    "oral history",
+    "metadata model",
+    "FAIR data",
+    "GDPR",
+    "data minimisation",
+    "DCTAP",
+    "JSON Schema",
+    "Dublin Core",
+    "REFI-QDA",
+    "QDPX",
+    "schema.org",
+    "minimal metadata",
+    "research data management"
+  ],
+  "communities": [
+    {"identifier": "zenodo"},
+    {"identifier": "dariah"},
+    {"identifier": "clarin"}
+  ],
+  "notes": "DCTAP-as-SSoT: tap/core.csv is authoritative; schema/core.schema.json is a derived artefact. Zenodo deposit is an immutable snapshot; the working repository is kbehnamshad.",
+  "related_identifiers": [
+    {
+      "identifier": "https://gitlab.uni.lu/c2dh/lhi/luxoh-cmdi",
+      "relation": "isSupplementedBy",
+      "scheme": "url",
+      "resource_type": "dataset"
+    }
+  ]
+}

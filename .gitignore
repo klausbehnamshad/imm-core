@@ -1,0 +1,15 @@
+# Legacy LuxOH-CMDI files — superseded by IMM-Core
+tap/minimal-metadata.csv
+schema/minimal-metadata.schema.json
+examples/klaus-record.json
+
+# Generated artifacts
+imm-core-v1.0.zip
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Python
+__pycache__/
+*.pyc
