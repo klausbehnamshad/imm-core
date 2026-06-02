@@ -34,7 +34,7 @@
     {"identifier": "dariah"},
     {"identifier": "clarin"}
   ],
-  "notes": "DCTAP-as-SSoT: tap/core.csv is authoritative; schema/core.schema.json is a derived artefact. Zenodo deposit is an immutable snapshot; the working repository is kbehnamshad.",
+  "notes": "DCTAP-as-SSoT: tap/core.csv is authoritative; schema/core.schema.json is a derived artefact. Zenodo deposit is an immutable snapshot; the working repository is https://github.com/klausbehnamshad/imm-core.",
   "related_identifiers": [
     {
       "identifier": "https://gitlab.uni.lu/c2dh/lhi/luxoh-cmdi",
