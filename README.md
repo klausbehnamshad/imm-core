@@ -60,6 +60,18 @@ python scripts/check_consistency.py
 
 IMM-Profile-LuxOH (oral history, C²DH Luxembourg) is the first registered profile; IMM-Profile-Migration is a worked reference example. See `profiles/README.md` for the conformance rules and the list of registered profiles.
 
+## Credits
+
+Developed by Klaus Behnam Shad, who designed the method, made all methodological decisions and is responsible for the content.
+
+AI tools assisted with parts of the work:
+
+- **Claude (Anthropic):** planning, design review and documentation
+- **Codex (OpenAI):** implementation of code components
+- **Muse (Meta):** prototype build from the approved plan
+
+The author reviewed every AI-assisted contribution before it was adopted.
+
 ## License
 
 [Creative Commons Attribution 4.0 International (CC-BY-4.0)](LICENSE)
