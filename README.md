@@ -46,7 +46,7 @@ npx ajv-cli validate -s schema/core.schema.json -d examples/core-generic.json
 
 ## Implementation Profiles
 
-LuxOH-CMDI (oral history, C²DH Luxembourg) is the first registered profile. See `profiles/luxoh-cmdi.md` and the canonical institutional implementation at [GitLab — LuxOH-CMDI](https://gitlab.uni.lu/c2dh/lhi/luxoh-cmdi).
+Metadata Model (oral history, C²DH Luxembourg) is the first registered profile. See the canonical institutional implementation at https://zenodo.org/records/20507329).
 
 ## License
 
