@@ -27,8 +27,8 @@ Each profile is identified by a short slug and named `IMM-Profile-{Slug}`. Regis
 
 | Slug | File | Discipline / institution | Core target | Profile version |
 |---|---|---|---|---|
-| `LuxOH` | `luxoh-cmdi.md` | Oral history — C²DH, University of Luxembourg | IMM-Core ^1.0 | 1.0 |
-| `Migration` | `generic-interview.md` | Migration-studies sociology (reference example) | IMM-Core ^1.0 | 1.0 |
+| `LuxOH` | `luxoh-cmdi.md` | Oral history — C²DH, University of Luxembourg | IMM-Core ^1.0 | 1.1 |
+| `Migration` | `generic-interview.md` | Migration-studies sociology (reference example) | IMM-Core ^1.0 | 1.1 |
 
 To register a new profile: open a pull request adding a row above and a corresponding profile file in this directory.
 

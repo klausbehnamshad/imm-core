@@ -7,7 +7,7 @@
 | **Discipline** | Oral history |
 | **Institution** | C²DH, University of Luxembourg |
 | **IMM-Core target** | `^1.0` |
-| **Profile version** | `1.0` |
+| **Profile version** | `1.1` |
 | **Maintainer** | Luxembourg Centre for Contemporary and Digital History (C²DH) |
 | **Canonical implementation** | [LuxOH-CMDI on GitLab](https://gitlab.uni.lu/c2dh/lhi/luxoh-cmdi) |
 
@@ -20,7 +20,7 @@ Fields not listed here inherit Core semantics unchanged.
 | propertyID | block | change | value / constraint |
 |---|---|---|---|
 | `record_id` | A | pattern tightened | `^[0-9]{4}-[0-9]{2}-[0-9]{2}_LHI_[0-9]{4}$` |
-| `consent_status` | A | enum imposed | `research-only \| teaching \| public \| embargoed` |
+| `consent_status` | A | enum imposed | `research-only \| teaching \| public \| embargoed \| withdrawn` |
 | `spatial` | B | vocabulary imposed | Luxembourg place-name list (managed in canonical GitLab implementation; see `[canonical repo]/vocabs/spatial-lu.md`) |
 | `file_format` | D | added, optional | string — master file format, e.g. `WAV 24/48` or `MP4 H.264` |
 | `master` | D | added, optional | boolean — `true` if this record refers to the master copy |
@@ -40,7 +40,7 @@ Apply these overrides to `schema/core.schema.json` properties when validating Lu
       "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}_LHI_[0-9]{4}$"
     },
     "consent_status": {
-      "enum": ["research-only", "teaching", "public", "embargoed"]
+      "enum": ["research-only", "teaching", "public", "embargoed", "withdrawn"]
     },
     "file_format": {
       "type": "string",
@@ -74,6 +74,7 @@ Apply these overrides to `schema/core.schema.json` properties when validating Lu
 | `teaching` | Academic research and anonymised teaching contexts |
 | `public` | No dissemination restrictions |
 | `embargoed` | Time-limited embargo; specific terms in institutional deposit agreement |
+| `withdrawn` | Participant withdrew consent; `accessRights` MUST be `closed` (Core invariant, see `vocabs/consent_status.md`) |
 
 **`spatial`** (Luxembourg places): managed in the canonical GitLab implementation. The list covers Luxembourg municipalities and cross-border regions relevant to LHI collections.
 
@@ -82,6 +83,8 @@ Apply these overrides to `schema/core.schema.json` properties when validating Lu
 ## What Core already provides
 
 This profile does not restate Core fields. All seven Core-required fields (`record_id`, `interview_date`, `interviewer`, `consent_status`, `accessRights`, `title`, `language`) remain required and semantically unchanged. The profile adds Block D preservation fields and tightens `record_id` pattern and `consent_status` enum only.
+
+**Profile 1.1 (IMM-Core 1.0.1):** `withdrawn` added to the `consent_status` enum. Version 1.0 omitted it and thereby violated the invariant in `vocabs/consent_status.md` that `withdrawn` is always available.
 
 ---
 

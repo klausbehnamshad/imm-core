@@ -7,7 +7,7 @@
 | **Discipline** | Migration studies, sociology |
 | **Institution** | Reference example — not institution-specific |
 | **IMM-Core target** | `^1.0` |
-| **Profile version** | `1.0` |
+| **Profile version** | `1.1` |
 | **Maintainer** | IMM-Core editorial board |
 
 ---
@@ -31,7 +31,7 @@ Fields not listed here inherit Core semantics unchanged.
 | `consent_status` | A | enum imposed | `broad-research \| specific-project-only \| withdrawn` |
 | `study_id` | A | added, optional | string — identifier linking the record to a parent study or ethics-approval unit |
 | `recruitment_method` | A | added, optional | string — recommended vocabulary below |
-| `record_id` | A | pattern recommended (not required) | `^[A-Z]{2}-[MF?]-[0-9]{4}-[0-9]{2}$` (country-gender-birthyear-sequence); enforcement is project-level |
+| `record_id` | A | pattern recommended (not required) | `^[0-9]{4}-[0-9]{2}-[0-9]{2}_[A-Z]+_[0-9]{4}$` (Core recommendation: date, study code, sequence); enforcement is project-level |
 
 ---
 
@@ -78,5 +78,7 @@ Fields not listed here inherit Core semantics unchanged.
 **`study_id` is not in Core** because many interview-based research traditions (biographical-narrative, IPA, single-case studies) work at the individual-interview level with no parent study structure. The field is optional even within this profile; it becomes de facto required when institutional ethics approval operates at the study level.
 
 **`recruitment_method` sits at the edge of Core's mandate.** In migration sociology, sampling strategy affects scope-of-inference and is methodologically significant enough to warrant a record-level field. In oral history, it typically does not. Its placement here as an optional profile field is the correct home; putting it in Core would import a social-science methodological assumption into a generic spec.
+
+**`record_id` carries no participant attributes.** Profile 1.0 recommended a pattern encoding country, gender and birth year. These are quasi-identifiers: combined with `spatial` and `interview_date` they can narrow a small sample down to one person, and an identifier is copied into every citation, file name and log. Participant attributes belong in a protected speaker record (Phase 2), not in the identifier.
 
 **`consent_status: withdrawn`** in this profile triggers a hard constraint: `accessRights` must be `closed`. Projects implementing this profile SHOULD enforce this in their validation pipeline.

@@ -17,10 +17,10 @@ A Schema.org/Dataset mapping enables web-level findability via Google Dataset Se
 |---|---|---|
 | `record_id` | `schema:identifier` | |
 | `interview_date` | `schema:dateCreated` | |
-| `interviewer` | `schema:creator` | Type `schema:Person`; add `schema:sameAs` with ORCID URI (e.g. `https://orcid.org/0000-0001-2345-6789`) if available |
+| `interviewer` | `schema:creator` | Type `schema:Person`; add `schema:sameAs` with ORCID URI (e.g. `https://orcid.org/0000-0001-2345-6789`) if available. Deliberate difference from the Dublin Core crosswalk (`dcterms:contributor`): dataset harvesters such as Google Dataset Search expect `creator`, and the interviewer is the person who produced the recording as a dataset. |
 | `title` | `schema:name` | |
 | `abstract` | `schema:description` | |
-| `language` | `schema:inLanguage` | ISO 639-3 three-letter codes are accepted by most harvesters; BCP 47 is formally required but 3-letter codes pass in practice |
+| `language` | `schema:inLanguage` | Schema.org expects a BCP 47 tag. BCP 47 uses the shortest available code, so exporters SHOULD convert ISO 639-3 to ISO 639-1 where one exists (`deu` → `de`, `nld` → `nl`) and keep the 3-letter code otherwise (e.g. `ltz` → `lb`, but `gsw` stays `gsw`). |
 | `spatial` | `schema:spatialCoverage` | Type `schema:Place` with `schema:name` set to the IMM `spatial` string value |
 | `keywords` | `schema:keywords` | Comma-separated string or array; Schema.org accepts both |
 | `accessRights` | `schema:conditionsOfAccess` | Schema.org has no closed vocabulary here; pass the IMM string directly |
@@ -46,7 +46,7 @@ A Schema.org/Dataset mapping enables web-level findability via Google Dataset Se
     "name": "Klaus Behnam Shad",
     "sameAs": "https://orcid.org/0000-0002-3601-9024"
   },
-  "inLanguage": "deu",
+  "inLanguage": "de",
   "spatialCoverage": {
     "@type": "Place",
     "name": "Esch-sur-Alzette"

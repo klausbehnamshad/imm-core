@@ -19,7 +19,7 @@ All `XXXXXXX` instances replaced with `20507329` across:
 
 ## Step 3 — Prepare the upload bundle
 
-From the `colloquium-align/` directory, run:
+From the repository root, run:
 
 ```bash
 zip -r imm-core-v1.0.zip \
