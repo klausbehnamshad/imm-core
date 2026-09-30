@@ -6,11 +6,11 @@
 
 ---
 
-## ✅ Step 1 — Create draft deposit and reserve DOI *(done)*
+## Step 1 — Create draft deposit and reserve DOI *(done)*
 
 Draft created at https://zenodo.org. DOI reserved: `10.5281/zenodo.20507329`.
 
-## ✅ Step 2 — Update files with real DOI *(done)*
+## Step 2 — Update files with real DOI *(done)*
 
 All `XXXXXXX` instances replaced with `20507329` across:
 `README.md`, `docs/README.md`, `schema/core.schema.json`, `CITATION.cff`.
