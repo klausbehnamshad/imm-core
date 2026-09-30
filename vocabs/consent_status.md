@@ -32,14 +32,14 @@ This file provides a cross-domain reference vocabulary. Implementation Profiles 
 
 | Profile | Terms in use |
 |---|---|
-| IMM-Profile-LuxOH | `research-only` \| `teaching` \| `public` \| `embargoed` |
+| IMM-Profile-LuxOH | `research-only` \| `teaching` \| `public` \| `embargoed` \| `withdrawn` |
 | IMM-Profile-Migration | `broad-research` \| `specific-project-only` \| `withdrawn` |
 
 ---
 
 ## Invariant rule
 
-`withdrawn` MUST always be available as a valid value, even in profiles that specify a restricted enum. A withdrawn record MUST set `accessRights: "closed"`.
+`withdrawn` MUST always be available as a valid value, even in profiles that specify a restricted enum. A withdrawn record MUST set `accessRights: "closed"`. Since IMM-Core 1.0.1 the Core schema enforces this rule.
 
 ---
 

@@ -5,7 +5,42 @@ Format: [Semantic Versioning](https://semver.org/). Breaking changes are marked 
 
 ---
 
-## [1.0] — 2026-01-01
+## [1.0.1] — Unreleased
+
+Consistency and correctness fixes. No field is added, removed or renamed; every record that met the v1.0 documentation still validates.
+
+### Schema (`schema/core.schema.json`) and DCTAP (`tap/core.csv`)
+
+- `consent_status: withdrawn` now requires `accessRights: closed` (`if`/`then`). The rule was a MUST in `vocabs/consent_status.md` but not machine-checked.
+- `interview_date`: added `pattern` `^[0-9]{4}-[0-9]{2}-[0-9]{2}$`, so the date shape is checked even by validators that treat `format` as an annotation only.
+- `record_id`, `interviewer`, `consent_status`, `title` and each `keywords` item must be non-empty (`minLength: 1`). An empty string was valid before, which made "required" meaningless.
+- `tap/core.csv` now carries the `language` and `interview_date` patterns and the timecode pattern (in notes). The schema enforced them, but the single source of truth did not list them.
+- `interviewer` description aligned between TAP and schema: "Name(s) of the interviewer(s) as a single string".
+
+### Profiles
+
+- IMM-Profile-LuxOH 1.1: `withdrawn` added to the `consent_status` enum. Version 1.0 violated the invariant that `withdrawn` is always available.
+- IMM-Profile-Migration 1.1: the recommended `record_id` pattern no longer encodes country, gender and birth year (quasi-identifiers); it follows the Core recommendation. Example `interviewee_display` changed accordingly.
+
+### Documentation
+
+- README quick start: the `ajv-cli` command failed on `"format": "date"`; it now loads `ajv-formats`.
+- README: repaired the broken "Implementation Profiles" paragraph.
+- "Thirteen fields in four blocks" corrected to three blocks (A–C) with Block D reserved for profiles (README, docs §5, §6, `.zenodo.json`).
+- docs §6: removed a dangling reference to "E.1 discussion in project outline".
+- docs §9.4: record revisions belong in the record's own history, not in the specification's `CHANGELOG.md`.
+- Crosswalks: `language` exports SHOULD convert ISO 639-3 to the shortest BCP 47 tag (`deu` → `de`); the Schema.org `creator` vs. Dublin Core `contributor` difference for `interviewer` is now explained.
+- Release date of v1.0 corrected to 2026-06-02 (Zenodo publication date) in this file and in `.zenodo.json`.
+
+### Tooling
+
+- `scripts/check_consistency.py`: checks TAP ↔ schema agreement, validates `examples/*.json` and rejects `tests/invalid/*.json`.
+- CI workflow `.github/workflows/validate.yml` runs the check and the README quick start.
+- `examples/core-minimal.json`: a record with only the seven required fields.
+
+---
+
+## [1.0] — 2026-06-02
 
 Initial release of IMM-Core (Interview Metadata Model — Core Profile), generalised from LuxOH-CMDI v1.1.
 

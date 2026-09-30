@@ -8,7 +8,7 @@ A generic, openly published minimal metadata model for interview-based qualitati
 
 ## What this is
 
-IMM-Core specifies the *descriptive metadata layer* — thirteen fields in four blocks that describe an interview as a research object, prior to and independently of analysis. It uses a two-layer architecture: this Core Profile plus discipline-specific or institution-specific **Implementation Profiles** that extend it.
+IMM-Core specifies the *descriptive metadata layer* — thirteen fields in three functional blocks (A Administrative, B Descriptive, C Structural) that describe an interview as a research object, prior to and independently of analysis. It uses a two-layer architecture: this Core Profile plus discipline-specific or institution-specific **Implementation Profiles** that extend it. A fourth block, D Preservation, is reserved for profiles.
 
 ## Who it's for
 
@@ -19,7 +19,8 @@ Researchers, archivists, repository managers, and data stewards working with int
 ```
 tap/core.csv                          # DCTAP profile — single source of truth
 schema/core.schema.json               # JSON Schema mirror (derived from DCTAP)
-examples/core-generic.json            # Minimal valid Core record (migration studies)
+examples/core-minimal.json            # Minimal valid Core record (required fields only)
+examples/core-generic.json            # Complete Core record (migration studies)
 examples/core-luxoh.json              # Valid Core record (LuxOH oral history profile)
 vocabs/consent_status.md              # Recommended vocabulary for consent_status
 profiles/README.md                    # Conformance rules; profile registration
@@ -30,6 +31,8 @@ crosswalks/qdpx.md                    # REFI-QDA/QDPX complementarity and bounda
 crosswalks/schema-org-dataset.md      # Web-level findability mapping
 methodological-positions/abstracts.md # Descriptive-vs-analytic abstract position paper
 docs/README.md                        # Full conceptual documentation (§1–§11)
+scripts/check_consistency.py          # Checks TAP ↔ schema agreement and validates examples
+tests/invalid/                        # Records that must fail validation
 ```
 
 ## How to cite
@@ -41,12 +44,33 @@ Behnam Shad, Klaus (2026). *IMM-Core: Interview Metadata Model — Core Profile*
 Validate a record against the Core schema:
 
 ```bash
-npx ajv-cli validate -s schema/core.schema.json -d examples/core-generic.json
+npx -p ajv-cli@5 -p ajv-formats@3 ajv validate -c ajv-formats \
+  -s schema/core.schema.json -d examples/core-generic.json
+```
+
+`ajv-formats` is needed because the schema uses `"format": "date"`; without it, ajv-cli rejects the schema.
+
+Check that `tap/core.csv` and the schema agree and that all examples validate (Python, `pip install jsonschema`):
+
+```bash
+python scripts/check_consistency.py
 ```
 
 ## Implementation Profiles
 
-Metadata Model (oral history, C²DH Luxembourg) is the first registered profile. See the canonical institutional implementation at https://zenodo.org/records/20507329).
+IMM-Profile-LuxOH (oral history, C²DH Luxembourg) is the first registered profile; IMM-Profile-Migration is a worked reference example. See `profiles/README.md` for the conformance rules and the list of registered profiles.
+
+## Credits
+
+Developed by Klaus Behnam Shad, who designed the method, made all methodological decisions and is responsible for the content.
+
+AI tools assisted with parts of the work:
+
+- **Claude (Anthropic):** planning, design review and documentation
+- **Codex (OpenAI):** implementation of code components
+- **Muse (Meta):** prototype build from the approved plan
+
+The author reviewed every AI-assisted contribution before it was adopted.
 
 ## License
 

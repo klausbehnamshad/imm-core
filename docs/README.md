@@ -124,7 +124,7 @@ The recommended handoff convention — matching QDPX `<Source>` identifiers to I
 
 IMM-Core uses a two-layer architecture: a **Core Profile** and **Implementation Profiles**.
 
-**Core Profile** (this specification): generic, discipline-agnostic, methodologically neutral. Thirteen fields across four functional blocks. Seven required. No discipline-specific vocabularies enforced except `accessRights` (which is genuinely cross-domain stable). `tap/core.csv` is the single source of truth; `schema/core.schema.json` is the derived machine-readable mirror.
+**Core Profile** (this specification): generic, discipline-agnostic, methodologically neutral. Thirteen fields across three functional blocks (A–C); Block D is reserved for profiles. Seven required. No discipline-specific vocabularies enforced except `accessRights` (which is genuinely cross-domain stable). `tap/core.csv` is the single source of truth; `schema/core.schema.json` is the derived machine-readable mirror.
 
 **Implementation Profiles**: discipline-specific or institution-specific specialisations. Each profile is expressed as a DCTAP delta (only fields that differ from or are added to Core) and a JSON Schema fragment. Profiles may add fields, tighten constraints, and impose controlled vocabularies. Profiles may not remove Core-required fields, loosen the `accessRights` enum, or override Core field semantics.
 
@@ -136,14 +136,14 @@ Registered profiles and registration instructions are in `profiles/README.md`. T
 
 ## 6. The Four Functional Blocks
 
-Any interview metadata record must cover four domains regardless of discipline or serialisation format. IMM-Core organises its thirteen fields into four blocks:
+Any interview metadata record must cover four domains regardless of discipline or serialisation format. IMM-Core organises its thirteen fields into Blocks A–C; Block D is defined here but populated only by Implementation Profiles:
 
 **Block A — Administrative.** Identity, provenance, and rights. Required: `record_id`, `interview_date`, `interviewer`, `consent_status`, `accessRights`. These five fields make the interview citable and rights-governable; no interview record is complete without them.
 
 - `record_id`: stable identifier. Recommended format `YYYY-MM-DD_{INSTITUTION_CODE}_{NNNN}`. Pattern not enforced at Core; profiles impose institution-specific patterns. *Not in Core by design:* no UUID mandate, no namespace registry — implementation policy belongs in profiles.
 - `interview_date`: ISO 8601 date (YYYY-MM-DD). *Not in Core:* date ranges, approximate dates — deferred to Phase 2.
 - `interviewer`: name string; ORCID in parentheses recommended. *Not in Core:* multi-interviewer objects, institutional affiliation — deferred to Phase 2.
-- `consent_status`: free string at Core; see `vocabs/consent_status.md` for recommended vocabulary. *No enum at Core:* discipline-specific consent regimes belong in profiles (see E.1 discussion in project outline).
+- `consent_status`: free string at Core; see `vocabs/consent_status.md` for recommended vocabulary. *No enum at Core:* discipline-specific consent regimes belong in profiles. One invariant holds everywhere: `withdrawn` implies `accessRights: closed`, enforced by the schema.
 - `accessRights`: `open | restricted | closed`. *This enum is enforced at Core level* because it is genuinely cross-domain stable — OpenAIRE, Zenodo, and DataCite all use it — and is the minimum for machine-readable access governance.
 
 **Block B — Descriptive.** Content and context. Required: `title`, `language`. Optional: `interviewee_display`, `spatial`, `keywords`, `abstract`.
@@ -206,7 +206,7 @@ No IMM-Core field requires a specific institutional system. The model operates w
 
 **3. `language` is not ISO 639-3.** Using BCP 47 tags (`en`, `de`), two-letter ISO 639-1 codes, or natural-language names (`English`, `German`) instead of ISO 639-3 three-letter codes (`eng`, `deu`) breaks machine-readable filtering. The Core schema enforces a three-letter lowercase pattern.
 
-**4. `record_id` is not stable.** Record identifiers must not be reassigned. If a record is revised, the `record_id` stays the same; changes are documented in `CHANGELOG.md`. Changing identifiers silently breaks external references and citations.
+**4. `record_id` is not stable.** Record identifiers must not be reassigned. If a record is revised, the `record_id` stays the same; revisions are documented in the record's own version history (e.g. the repository or catalogue that holds it), not in the IMM-Core `CHANGELOG.md`, which documents changes to the specification. Changing identifiers silently breaks external references and citations.
 
 **5. `timecoded_segments` labels are analytic.** Labels like "Charmaz node 3" or "core category: belonging" belong in QDA software, not in the structural segmentation layer. Labels should describe what happens in the segment at a factual level: "Childhood and migration background", "Discussion of work conditions".
 
@@ -226,7 +226,7 @@ No IMM-Core field requires a specific institutional system. The model operates w
 | New optional field; loosened optional-field constraint | MINOR |
 | Documentation or description correction without semantic change | PATCH |
 
-**DCTAP-as-SSoT.** `tap/core.csv` is authoritative. `schema/core.schema.json` is derived. If they diverge, the DCTAP is correct. CI pipelines on working repositories should validate their consistency.
+**DCTAP-as-SSoT.** `tap/core.csv` is authoritative. `schema/core.schema.json` is derived. If they diverge, the DCTAP is correct. `scripts/check_consistency.py` validates their consistency and runs in this repository's CI (`.github/workflows/validate.yml`).
 
 **Zenodo deposits are immutable snapshots.** Each Zenodo release is a tagged version. Breaking changes produce a new DOI on the new major version. `CHANGELOG.md` documents all changes between versions.
 
