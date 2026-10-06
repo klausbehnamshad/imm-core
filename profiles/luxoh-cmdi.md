@@ -84,7 +84,7 @@ Apply these overrides to `schema/core.schema.json` properties when validating Lu
 
 This profile does not restate Core fields. All seven Core-required fields (`record_id`, `interview_date`, `interviewer`, `consent_status`, `accessRights`, `title`, `language`) remain required and semantically unchanged. The profile adds Block D preservation fields and tightens `record_id` pattern and `consent_status` enum only.
 
-**Profile 1.1 (IMM-Core 1.0.1):** `withdrawn` added to the `consent_status` enum. Version 1.0 omitted it and thereby violated the invariant in `vocabs/consent_status.md` that `withdrawn` is always available.
+**Profile 1.1 (IMM-Core 1.1.0):** `withdrawn` added to the `consent_status` enum. Version 1.0 omitted it and thereby violated the invariant in `vocabs/consent_status.md` that `withdrawn` is always available.
 
 ---
 

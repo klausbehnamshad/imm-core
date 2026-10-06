@@ -1,6 +1,6 @@
 # IMM-Core: Interview Metadata Model — Core Profile
 
-**Version:** 1.0 | **License:** [CC-BY-4.0](LICENSE) | **DOI:** 10.5281/zenodo.20507329
+**Version:** 1.1.0 | **License:** [CC-BY-4.0](LICENSE) | **DOI:** 10.5281/zenodo.20507329
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20507329.svg)](https://doi.org/10.5281/zenodo.20507329)
 
@@ -8,7 +8,7 @@ A generic, openly published minimal metadata model for interview-based qualitati
 
 ## What this is
 
-IMM-Core specifies the *descriptive metadata layer* — thirteen fields in three functional blocks (A Administrative, B Descriptive, C Structural) that describe an interview as a research object, prior to and independently of analysis. It uses a two-layer architecture: this Core Profile plus discipline-specific or institution-specific **Implementation Profiles** that extend it. A fourth block, D Preservation, is reserved for profiles.
+IMM-Core specifies the *descriptive metadata layer* — fourteen fields in three functional blocks (A Administrative, B Descriptive, C Structural) that describe an interview as a research object, prior to and independently of analysis. It uses a two-layer architecture: this Core Profile plus discipline-specific or institution-specific **Implementation Profiles** that extend it. A fourth block, D Preservation, is reserved for profiles.
 
 ## Who it's for
 
