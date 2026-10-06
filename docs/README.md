@@ -35,7 +35,7 @@ This is not merely a technical observation. Metadata is the scaffold that transf
 
 IMM-Core is a minimal metadata model for interview-based qualitative research. It is designed to be generic across disciplines — oral history, sociology, anthropology, education, migration studies, health research, political science — and agnostic with respect to qualitative data analysis (QDA) tradition. It does this by occupying a precise niche: the *descriptive metadata layer*, the level at which the interview is described as a research object, prior to and independently of whatever analytic work is done on it.
 
-The model has two layers. The **Core Profile** (this document) specifies the generic, discipline-agnostic minimum. **Implementation Profiles** specialise the Core for particular disciplines or institutions by adding fields, imposing controlled vocabularies, and tightening constraints. LuxOH-CMDI — the Luxembourg oral history institutional model from which IMM-Core was generalised — is one such Implementation Profile (see `profiles/luxoh-cmdi.md`).
+The model has two layers. The **Core Profile** (this document) specifies the generic, discipline-agnostic minimum. **Implementation Profiles** specialise the Core for particular disciplines or institutions by adding fields, imposing controlled vocabularies, and tightening constraints. IMM-Profile-LuxOH (formerly LuxOH-CMDI) — the Luxembourg oral history institutional model from which IMM-Core was generalised — is one such Implementation Profile (see `profiles/luxoh-cmdi.md`).
 
 ---
 
@@ -49,7 +49,7 @@ Four imperatives converge on minimality:
 
 **Cognitive simplicity.** A model that requires fifteen mandatory fields will not be consistently populated by interdisciplinary research teams, student researchers, or archivists under time pressure. Metadata that exists only in the schema and never in the records is worse than no schema, because it creates a false sense of coverage. The Core requires seven fields. This is not an accident.
 
-**Ethical clarity.** GDPR's principle of data minimisation applies to metadata about research participants as much as to the primary data itself. A metadata model that collects granular personal information about interviewees in the name of discoverability creates a privacy risk that no research benefit can straightforwardly justify. The Core's minimal speaker hook (`interviewee_display` — a pseudonym or display name) deliberately sits below the threshold of personal data while providing enough descriptive anchor for the record.
+**Ethical clarity.** GDPR's principle of data minimisation applies to metadata about research participants as much as to the primary data itself. A metadata model that collects granular personal information about interviewees in the name of discoverability creates a privacy risk that no research benefit can straightforwardly justify. The Core's minimal speaker hook (`interviewee_display` — a pseudonym or display name) is minimised and pseudonymised; whether it remains personal data is assessed in context (EDPB Guidelines 01/2025 on pseudonymisation, version for public consultation, paras 21–22; CJEU C-413/23 P, 4 September 2025, paras 77 and 86) while providing enough descriptive anchor for the record.
 
 **Interoperability.** Fewer, better-defined fields crosswalk more cleanly to Dublin Core, Schema.org, and DataCite than many fields with ambiguous external mappings. Every Core field has a plausible external mapping; the crosswalk files in `crosswalks/` document where those mappings hold and where they break down.
 
@@ -63,13 +63,13 @@ The FAIR principles (Findable, Accessible, Interoperable, Reusable — Wilkinson
 
 **Findable.** `record_id` provides the stable unique identifier that FAIR F1 requires. `title`, `keywords`, and `abstract` support the rich metadata that F2 and F3 require. `language` and `spatial` enable filtering and scoped discovery.
 
-**Accessible.** `accessRights` (`open | restricted | closed`) directly implements the A1 and A2 conditions: data is accessible under well-defined conditions, even when those conditions include access controls. A `restricted` record is accessible — under specified terms — which is FAIR-compliant. A record with no `accessRights` declaration is not.
+**Accessible.** `accessRights` (`open | restricted | closed`) declares the access condition (FAIR A1.2); the retrieval protocol (A1) and metadata persistence after data removal (A2) are properties of the hosting infrastructure, not of this field: data is accessible under well-defined conditions, even when those conditions include access controls. A `restricted` record is accessible — under specified terms — which is FAIR-compliant. A record with no `accessRights` declaration is not.
 
 **Interoperable.** The crosswalk files document how Core fields map to Dublin Core, Schema.org, and QDPX. The JSON Schema enables machine-readable validation. The DCTAP profile provides a metadata-standard-agnostic specification of field semantics.
 
 **Reusable.** `consent_status` documents the participant-consent basis for reuse — a precondition for legally defensible secondary analysis. GDPR Art. 5(1)(c) requires that personal data be "adequate, relevant, and limited to what is necessary." The Core's minimality is a direct implementation of this principle.
 
-Minimal metadata is not in tension with reusability. It is a precondition for *legally defensible* reusability. A research data record that collects unnecessary personal detail about participants may technically satisfy FAIR findability while creating GDPR liability. The Core is designed so that no field creates a data-minimisation problem when properly populated.
+Minimal metadata is not in tension with reusability. It is a precondition for *legally defensible* reusability. A research data record that collects unnecessary personal detail about participants may technically satisfy FAIR findability while creating GDPR liability. Data minimisation is a property of the populated record, not of the field list: `interviewer`, `spatial` and `interview_date` in combination can identify a person; profiles decide which combinations their collection may carry.
 
 ---
 
@@ -85,7 +85,7 @@ Dublin Core Metadata Terms (DCTERMS) provides the semantic baseline from which I
 
 ### 4.2 CMDI
 
-The Component Metadata Infrastructure (CMDI), developed within the CLARIN research infrastructure, provides a modular component framework for language-resource metadata. LuxOH-CMDI was originally developed as a CMDI-compatible profile, and the modular logic of CMDI — components can be combined, constrained, and specialised — directly informs IMM-Core's two-layer architecture. An institution with CLARIN infrastructure can express an IMM-Core Implementation Profile as a CMDI component; an institution without that infrastructure can implement the same profile as a JSON Schema and a DCTAP file.
+The Component Metadata Infrastructure (CMDI), developed within the CLARIN research infrastructure, provides a modular component framework for language-resource metadata. IMM-Profile-LuxOH was originally developed as a CMDI-compatible profile, and the modular logic of CMDI — components can be combined, constrained, and specialised — directly informs IMM-Core's two-layer architecture. An institution with CLARIN infrastructure can express an IMM-Core Implementation Profile as a CMDI component; an institution without that infrastructure can implement the same profile as a JSON Schema and a DCTAP file.
 
 **Boundary.** CMDI as a whole requires a CLARIN Centre or equivalent institutional host for component registration, schema deployment, and VLO harvesting. IMM-Core borrows the modular logic without requiring the full CMDI stack.
 
@@ -160,7 +160,9 @@ Any interview metadata record must cover four domains regardless of discipline o
 - `timecoded_segments`: array of `{start, end, label}` objects in HH:MM:SS. Descriptive segmentation for navigation. *Not in Core:* analytic coding, transcription — QDPX territory.
 - `related_materials`: array of URL/DOI strings for transcripts, companion documents, derived files.
 
-**Block D — Preservation.** File-format, master-copy, checksum, and access-copy fields. *Absent from Core v1.0 by design.* Block D is a profile-level concern: LuxOH-CMDI adds it via IMM-Profile-LuxOH. The Core's mandate stops at the descriptive-metadata layer; preservation metadata is infrastructure-specific and belongs in profiles.
+**Block D — Preservation.** File-format, master-copy, checksum, and access-copy fields. *Absent from Core v1.0 by design.* Block D is a profile-level concern: IMM-Profile-LuxOH adds it via its Block D extension. The Core's mandate stops at the descriptive-metadata layer; preservation metadata is infrastructure-specific and belongs in profiles.
+
+**Disclosure risk of descriptive fields.** Descriptive combinations can carry disclosure risk even when each field looks innocuous. Profiles SHOULD check three questions before allowing a combination: can a record single out a person? can it be linked to another source? can an attribute be inferred? (EDPB draft Guidelines 02/2026 on anonymisation, adopted July 2026, public consultation until 30 October 2026, status draft).
 
 ---
 

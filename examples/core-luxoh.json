@@ -1,7 +1,7 @@
 {
   "record_id": "2024-05-18_LHI_0042",
   "interview_date": "2024-05-18",
-  "interviewer": "Klaus Behnam Shad",
+  "interviewer": "Interviewer A",
   "consent_status": "research-only",
   "accessRights": "restricted",
   "title": "Interview with a former steelworker in Esch-Belval",
@@ -23,6 +23,7 @@
     }
   ],
   "related_materials": [
-    "https://gitlab.uni.lu/c2dh/lhi/luxoh-cmdi/-/raw/main/data/transcript-LHI-0042.docx"
-  ]
+    "https://doi.org/10.5555/imm-example-0042"
+  ],
+  "governance_ref": "urn:example:governance:lhi-0042"
 }
