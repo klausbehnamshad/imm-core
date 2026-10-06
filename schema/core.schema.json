@@ -32,6 +32,11 @@
       "enum": ["open", "restricted", "closed"],
       "description": "Block A. Repository-level access rights. Uses cross-domain OpenAIRE/Zenodo/DataCite terms."
     },
+    "governance_ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Block A. Stable reference to the governance record that documents the decisions applying to this interview (for example a DPO, ethics-panel or controller decision, or a class release record). The referenced record, not this field, states purpose, legal basis, permitted processing routes and permitted machine reuse."
+    },
     "title": {
       "type": "string",
       "minLength": 1,
