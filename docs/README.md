@@ -49,7 +49,7 @@ Four imperatives converge on minimality:
 
 **Cognitive simplicity.** A model that requires fifteen mandatory fields will not be consistently populated by interdisciplinary research teams, student researchers, or archivists under time pressure. Metadata that exists only in the schema and never in the records is worse than no schema, because it creates a false sense of coverage. The Core requires seven fields. This is not an accident.
 
-**Ethical clarity.** GDPR's principle of data minimisation applies to metadata about research participants as much as to the primary data itself. A metadata model that collects granular personal information about interviewees in the name of discoverability creates a privacy risk that no research benefit can straightforwardly justify. The Core's minimal speaker hook (`interviewee_display` — a pseudonym or display name) is minimised and pseudonymised; whether it remains personal data is assessed in context (EDPB Guidelines 01/2025 on pseudonymisation, version for public consultation, paras 21–22; CJEU C-413/23 P, 4 September 2025, paras 77 and 86) while providing enough descriptive anchor for the record.
+**Ethical clarity.** GDPR's principle of data minimisation applies to metadata about research participants as much as to the primary data itself. A metadata model that collects granular personal information about interviewees in the name of discoverability creates a privacy risk that no research benefit can straightforwardly justify. The Core's minimal speaker hook (`interviewee_display` — a pseudonym or display name) is minimised and pseudonymised and provides enough descriptive anchor for the record; whether it remains personal data is assessed in context (EDPB Guidelines 01/2025 on pseudonymisation, version for public consultation, paras 21–22; CJEU C-413/23 P, 4 September 2025, paras 77 and 86).
 
 **Interoperability.** Fewer, better-defined fields crosswalk more cleanly to Dublin Core, Schema.org, and DataCite than many fields with ambiguous external mappings. Every Core field has a plausible external mapping; the crosswalk files in `crosswalks/` document where those mappings hold and where they break down.
 
@@ -124,7 +124,7 @@ The recommended handoff convention — matching QDPX `<Source>` identifiers to I
 
 IMM-Core uses a two-layer architecture: a **Core Profile** and **Implementation Profiles**.
 
-**Core Profile** (this specification): generic, discipline-agnostic, methodologically neutral. Thirteen fields across three functional blocks (A–C); Block D is reserved for profiles. Seven required. No discipline-specific vocabularies enforced except `accessRights` (which is genuinely cross-domain stable). `tap/core.csv` is the single source of truth; `schema/core.schema.json` is the derived machine-readable mirror.
+**Core Profile** (this specification): generic, discipline-agnostic, methodologically neutral. Fourteen fields across three functional blocks (A–C); Block D is reserved for profiles. Seven required. No discipline-specific vocabularies enforced except `accessRights` (which is genuinely cross-domain stable). `tap/core.csv` is the single source of truth; `schema/core.schema.json` is the derived machine-readable mirror.
 
 **Implementation Profiles**: discipline-specific or institution-specific specialisations. Each profile is expressed as a DCTAP delta (only fields that differ from or are added to Core) and a JSON Schema fragment. Profiles may add fields, tighten constraints, and impose controlled vocabularies. Profiles may not remove Core-required fields, loosen the `accessRights` enum, or override Core field semantics.
 
@@ -136,7 +136,7 @@ Registered profiles and registration instructions are in `profiles/README.md`. T
 
 ## 6. The Four Functional Blocks
 
-Any interview metadata record must cover four domains regardless of discipline or serialisation format. IMM-Core organises its thirteen fields into Blocks A–C; Block D is defined here but populated only by Implementation Profiles:
+Any interview metadata record must cover four domains regardless of discipline or serialisation format. IMM-Core organises its fourteen fields into Blocks A–C; Block D is defined here but populated only by Implementation Profiles:
 
 **Block A — Administrative.** Identity, provenance, and rights. Required: `record_id`, `interview_date`, `interviewer`, `consent_status`, `accessRights`. These five fields make the interview citable and rights-governable; no interview record is complete without them.
 

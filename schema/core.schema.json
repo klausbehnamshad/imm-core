@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://doi.org/10.5281/zenodo.20507329/schema/core.schema.json",
   "title": "IMM-Core: Interview Metadata Model — Core Profile",
-  "description": "IMM-Core v1.0. Generic, discipline-agnostic metadata schema for interview-based qualitative research. Implementation Profiles (e.g. IMM-Profile-LuxOH, IMM-Profile-Migration) extend this Core without weakening its constraints. Core fields occupy three blocks (A Administrative, B Descriptive, C Structural); Block D (preservation fields) and full speaker components are deferred to Phase 2. Single source of truth: tap/core.csv.",
+  "description": "IMM-Core v1.1. Generic, discipline-agnostic metadata schema for interview-based qualitative research. Implementation Profiles (e.g. IMM-Profile-LuxOH, IMM-Profile-Migration) extend this Core without weakening its constraints. Core fields occupy three blocks (A Administrative, B Descriptive, C Structural); Block D (preservation fields) and full speaker components are deferred to Phase 2. Single source of truth: tap/core.csv.",
   "type": "object",
   "additionalProperties": false,
   "properties": {

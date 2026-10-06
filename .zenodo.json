@@ -1,6 +1,6 @@
 {
   "title": "IMM-Core: Interview Metadata Model — Core Profile",
-  "description": "A generic, openly published minimal metadata model for interview-based qualitative research. Discipline-agnostic (oral history, sociology, anthropology, education, migration studies, health research). Two-layer architecture: Core Profile (generic, 13 fields in blocks A–C; Block D reserved for profiles) plus Implementation Profiles (specialisations). LuxOH-CMDI (C²DH, University of Luxembourg) is the first registered profile. Includes DCTAP single source of truth, JSON Schema validator, two example records, three crosswalks (Dublin Core, REFI-QDA/QDPX, Schema.org/Dataset), two worked profiles, and full conceptual documentation.",
+  "description": "A generic, openly published minimal metadata model for interview-based qualitative research. Discipline-agnostic (oral history, sociology, anthropology, education, migration studies, health research). Two-layer architecture: Core Profile (generic, 14 fields in blocks A–C; Block D reserved for profiles) plus Implementation Profiles (specialisations). LuxOH-CMDI (C²DH, University of Luxembourg) is the first registered profile. Includes DCTAP single source of truth, JSON Schema validator, three example records, three crosswalks (Dublin Core, REFI-QDA/QDPX, Schema.org/Dataset), two worked profiles, and full conceptual documentation.",
   "license": "cc-by-4.0",
   "version": "1.1.0",
   "upload_type": "dataset",
