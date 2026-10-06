@@ -5,7 +5,7 @@ Format: [Semantic Versioning](https://semver.org/). Breaking changes are marked 
 
 ---
 
-## [1.1.0] — Unreleased
+## [1.1.0] — 2026-10-06
 
 Consistency and correctness fixes. One optional field is added (`governance_ref`). No field is removed or renamed. Three rules that v1.0 stated in prose are now enforced by the schema (non-empty required strings, date shape, withdrawn implies closed); a record that relied on an empty required string or on `withdrawn` without `closed` validated against the published v1.0 schema and no longer does. `tests/invalid/empty-title.json` and `tests/invalid/withdrawn-not-closed.json` document the two cases.
 
