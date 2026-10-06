@@ -41,6 +41,10 @@ This file provides a cross-domain reference vocabulary. Implementation Profiles 
 
 `withdrawn` MUST always be available as a valid value, even in profiles that specify a restricted enum. A withdrawn record MUST set `accessRights: "closed"`. Since IMM-Core 1.0.1 the Core schema enforces this rule.
 
+Values are case-sensitive, lowercase, exact strings. The Core rule fires only on the exact value `withdrawn`; `Withdrawn`, `withdrawn ` (trailing space) or a translated term do not trigger it and the Core cannot detect them. Implementation Profiles and ingest software MUST restrict `consent_status` input to the profile vocabulary plus `withdrawn`; unknown values are a clarification case, not a record.
+
+A withdrawn record SHOULD retain only the seven required fields (`record_id`, `interview_date`, `interviewer`, `consent_status`, `accessRights`, `title`, `language`) and `governance_ref`; `title` SHOULD be reduced to an administrative label. Descriptive fields (`interviewee_display`, `spatial`, `keywords`, `abstract`, `timecoded_segments`, `related_materials`) SHOULD be removed. Deleting derived files and propagating the withdrawal to copies and exports are operational duties outside the metadata record; the Core does not enforce them.
+
 ---
 
 ## Note on GDPR alignment
