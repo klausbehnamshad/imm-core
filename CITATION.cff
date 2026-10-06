@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use IMM-Core, please cite it as below."
 type: dataset
 title: "IMM-Core: Interview Metadata Model — Core Profile"
-version: "1.0"
+version: "1.1.0"
 date-released: "2026-06-02"
 doi: "10.5281/zenodo.20507329"
 license: CC-BY-4.0

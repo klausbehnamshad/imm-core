@@ -5,9 +5,15 @@ Format: [Semantic Versioning](https://semver.org/). Breaking changes are marked 
 
 ---
 
-## [1.0.1] — Unreleased
+## [1.1.0] — Unreleased
 
-Consistency and correctness fixes. No field is added, removed or renamed; every record that met the v1.0 documentation still validates.
+Consistency and correctness fixes. One optional field is added (`governance_ref`). No field is removed or renamed. Three rules that v1.0 stated in prose are now enforced by the schema (non-empty required strings, date shape, withdrawn implies closed); a record that relied on an empty required string or on `withdrawn` without `closed` validated against the published v1.0 schema and no longer does. `tests/invalid/empty-title.json` and `tests/invalid/withdrawn-not-closed.json` document the two cases.
+
+### Added
+
+- `governance_ref` (Block A, optional): stable reference to the governance record documenting the decisions applying to an interview; internal reference, must not be exported as a public link.
+- `vocabs/consent_status.md`: case-sensitivity of `consent_status` values and withdrawn-record guidance (retain only required fields plus `governance_ref`; descriptive fields should be removed).
+- `docs/README.md`: corrected pseudonymisation wording, FAIR A1/A1.2/A2 access wording and data-minimisation wording; new `Disclosure risk of descriptive fields` paragraph with three profile check questions; synthetic LuxOH example record.
 
 ### Schema (`schema/core.schema.json`) and DCTAP (`tap/core.csv`)
 
@@ -38,11 +44,15 @@ Consistency and correctness fixes. No field is added, removed or renamed; every 
 - CI workflow `.github/workflows/validate.yml` runs the check and the README quick start.
 - `examples/core-minimal.json`: a record with only the seven required fields.
 
+### Implementers
+
+Vendored copies of `tap/core.csv` and `schema/core.schema.json` should be refreshed. `governance_ref` is an internal reference and belongs on an export denylist by default.
+
 ---
 
 ## [1.0] — 2026-06-02
 
-Initial release of IMM-Core (Interview Metadata Model — Core Profile), generalised from LuxOH-CMDI v1.1.
+Initial release of IMM-Core (Interview Metadata Model — Core Profile), generalised from IMM-Profile-LuxOH (formerly LuxOH-CMDI) v1.1.
 
 ### Core Profile — new in this release
 
@@ -78,9 +88,9 @@ Initial release of IMM-Core (Interview Metadata Model — Core Profile), general
 
 ---
 
-## Relationship to LuxOH-CMDI
+## Relationship to IMM-Profile-LuxOH
 
-IMM-Core v1.0 is generalised from LuxOH-CMDI v1.1 (hosted on GitLab at C²DH). The breaking changes above are the moves that make the Core discipline-agnostic; they are design decisions, not corrections. LuxOH-CMDI continues as IMM-Profile-LuxOH, adding back the institution-specific constraints via the profile delta.
+IMM-Core v1.0 is generalised from IMM-Profile-LuxOH v1.1 (hosted on GitLab at C²DH). The breaking changes above are the moves that make the Core discipline-agnostic; they are design decisions, not corrections. The Luxembourg model continues as IMM-Profile-LuxOH, adding back the institution-specific constraints via the profile delta.
 
 ## Versioning policy
 
@@ -88,4 +98,5 @@ IMM-Core v1.0 is generalised from LuxOH-CMDI v1.1 (hosted on GitLab at C²DH). T
 |---|---|
 | New required field; field removal; tightened `accessRights` enum | MAJOR |
 | New optional field; loosened optional-field constraint | MINOR |
+| Rule tightened on an existing field so that previously schema-valid records fail | MINOR, listed explicitly with the affected test fixtures |
 | Documentation or description correction without semantic change | PATCH |
