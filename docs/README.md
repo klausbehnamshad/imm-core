@@ -1,6 +1,6 @@
 # IMM-Core: Interview Metadata Model — Core Profile
 
-**Version:** 1.0  
+**Version:** 1.1.0 (unreleased; the DOI below resolves to the published v1.0)  
 **License:** CC-BY-4.0  
 **DOI:** 10.5281/zenodo.20507329  
 **Citation:** Behnam Shad, Klaus (2026). *IMM-Core: Interview Metadata Model — Core Profile* (v1.0). Zenodo. https://doi.org/10.5281/zenodo.20507329

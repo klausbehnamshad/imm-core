@@ -48,6 +48,12 @@ Consistency and correctness fixes. One optional field is added (`governance_ref`
 
 Vendored copies of `tap/core.csv` and `schema/core.schema.json` should be refreshed. `governance_ref` is an internal reference and belongs on an export denylist by default.
 
+### Release checklist (maintainer)
+
+Set date-released in CITATION.cff and publication_date in .zenodo.json to the Zenodo publication date.
+Replace "Unreleased" in this heading with that date.
+Tag v1.1.0 on the merged commit; the DOI of v1.0 stays with v1.0, Zenodo mints a new version DOI.
+
 ---
 
 ## [1.0] — 2026-06-02

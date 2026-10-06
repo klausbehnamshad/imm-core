@@ -3,13 +3,14 @@ message: "If you use IMM-Core, please cite it as below."
 type: dataset
 title: "IMM-Core: Interview Metadata Model — Core Profile"
 version: "1.1.0"
+# date-released refers to the published v1.0 (DOI below); set the new date when 1.1.0 is published on Zenodo.
 date-released: "2026-06-02"
 doi: "10.5281/zenodo.20507329"
 license: CC-BY-4.0
 abstract: >
   A generic, openly published minimal metadata model for interview-based
   qualitative research. Discipline-agnostic two-layer architecture: Core Profile
-  (generic) plus Implementation Profiles (specialisations). LuxOH-CMDI is the
+  (generic) plus Implementation Profiles (specialisations). IMM-Profile-LuxOH (formerly LuxOH-CMDI) is the
   first registered Implementation Profile.
 authors:
   - family-names: "Behnam Shad"
