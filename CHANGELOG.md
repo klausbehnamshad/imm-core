@@ -1,13 +1,27 @@
 # Changelog — IMM-Core
 
 All notable changes to IMM-Core are documented here.  
-Format: [Semantic Versioning](https://semver.org/). Breaking changes are marked **[BREAKING]**.
+Format: [Semantic Versioning](https://semver.org/). Breaking changes are marked **[BREAKING]**. One local deviation from strict SemVer: a rule tightened on an existing field is released as MINOR and listed under Schema with its test fixtures (see Versioning policy below).
 
 ---
 
+## [Unreleased]
+
+### Documentation
+
+- Citation metadata after the Zenodo publication of 1.1.0: `CITATION.cff` and the citation lines in `README.md` and `docs/README.md` cite version 1.1.0 (10.5281/zenodo.23190815); the concept DOI for all versions is 10.5281/zenodo.20507328. 10.5281/zenodo.20507329 is the DOI of version 1.0 and stays with it.
+- `docs/README.md`: unreleased marker removed; the versioning table lists the MINOR row for tightened rules; the schema `$id` is described as a stable identifier.
+- Section 1.1.0 below: the summary now names all four classes of records that were valid under v1.0 and are not under 1.1.0. Two test fixtures added for the classes that had none (`tests/invalid/keywords-empty-item.json`, `tests/invalid/date-wrong-shape.json`); no schema rule changes.
+- `docs/README.md` and `vocabs/consent_status.md`: statements on pseudonymisation, FAIR accessibility, data minimisation, anonymisation criteria and legal basis reworded as descriptions with sources; the Core makes no legal assessment.
+- `tap/core.csv` and `schema/core.schema.json`: `consent_status` description no longer calls the value a GDPR-based category (description only, no rule change).
+- Crosswalks: `governance_ref` is an internal reference and is omitted from Dublin Core and Schema.org exports; the Schema.org example uses a synthetic interviewer and an example.org address.
+- `ZENODO-PUBLISHING-GUIDE.md`: DOI roles, 30-day file correction window, version field, 1.1.0 checklist.
+
 ## [1.1.0] — 2026-10-06
 
-Consistency and correctness fixes. One optional field is added (`governance_ref`). No field is removed or renamed. Three rules that v1.0 stated in prose are now enforced by the schema (non-empty required strings, date shape, withdrawn implies closed); a record that relied on an empty required string or on `withdrawn` without `closed` validated against the published v1.0 schema and no longer does. `tests/invalid/empty-title.json` and `tests/invalid/withdrawn-not-closed.json` document the two cases.
+Zenodo: https://doi.org/10.5281/zenodo.23190815 (this version); all versions: https://doi.org/10.5281/zenodo.20507328.
+
+Consistency and correctness fixes. One optional field is added (`governance_ref`). No field is removed or renamed. The schema now enforces that required strings and `keywords` entries are non-empty, that `interview_date` has the form YYYY-MM-DD also in validators without format checking, and that `withdrawn` implies `accessRights: closed`. Records that relied on an empty required string, an empty `keywords` entry, `withdrawn` without `closed`, or (in validators without format checking) another date form validated against the published v1.0 schema and no longer do. `tests/invalid/empty-title.json` and `tests/invalid/withdrawn-not-closed.json` document the first two cases; the fixtures for the other two (`tests/invalid/keywords-empty-item.json`, `tests/invalid/date-wrong-shape.json`) were added after the release (see Unreleased).
 
 ### Added
 
@@ -52,13 +66,13 @@ Vendored copies of `tap/core.csv` and `schema/core.schema.json` should be refres
 
 Set date-released in CITATION.cff and publication_date in .zenodo.json to the Zenodo publication date.
 Replace "Unreleased" in this heading with that date.
-Tag v1.1.0 on the merged commit; the DOI of v1.0 stays with v1.0, Zenodo mints a new version DOI.
+Tag the version on the commit that sets the publication date; earlier versions keep their DOIs, Zenodo mints a new version DOI.
 
 ---
 
 ## [1.0] — 2026-06-02
 
-Initial release of IMM-Core (Interview Metadata Model — Core Profile), generalised from IMM-Profile-LuxOH (formerly LuxOH-CMDI) v1.1.
+Initial release of IMM-Core (Interview Metadata Model — Core Profile), generalised from the institutional predecessor model, version 1.1.
 
 ### Core Profile — new in this release
 
@@ -96,7 +110,7 @@ Initial release of IMM-Core (Interview Metadata Model — Core Profile), general
 
 ## Relationship to IMM-Profile-LuxOH
 
-IMM-Core v1.0 is generalised from IMM-Profile-LuxOH v1.1 (hosted on GitLab at C²DH). The breaking changes above are the moves that make the Core discipline-agnostic; they are design decisions, not corrections. The Luxembourg model continues as IMM-Profile-LuxOH, adding back the institution-specific constraints via the profile delta.
+IMM-Core v1.0 is generalised from the institutional predecessor model, version 1.1, hosted on GitLab at C²DH. The breaking changes above are the moves that make the Core discipline-agnostic; they are design decisions, not corrections. The Luxembourg model continues as IMM-Profile-LuxOH, adding back the institution-specific constraints via the profile delta.
 
 ## Versioning policy
 

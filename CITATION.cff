@@ -3,9 +3,8 @@ message: "If you use IMM-Core, please cite it as below."
 type: dataset
 title: "IMM-Core: Interview Metadata Model — Core Profile"
 version: "1.1.0"
-# date-released refers to the published v1.0 (DOI below); set the new date when 1.1.0 is published on Zenodo.
 date-released: "2026-10-06"
-doi: "10.5281/zenodo.20507329"
+doi: "10.5281/zenodo.23190815"
 license: CC-BY-4.0
 abstract: >
   A generic, openly published minimal metadata model for interview-based
@@ -18,7 +17,7 @@ authors:
     orcid: "https://orcid.org/0000-0002-3601-9024"
     affiliation: "Luxembourg Centre for Contemporary and Digital History (C²DH), University of Luxembourg"
 repository-code: "https://github.com/klausbehnamshad/imm-core"
-url: "https://doi.org/10.5281/zenodo.20507329"
+url: "https://doi.org/10.5281/zenodo.20507328"
 keywords:
   - "interview metadata"
   - "qualitative research"

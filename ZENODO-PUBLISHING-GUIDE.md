@@ -1,8 +1,8 @@
 # Zenodo Publishing Guide — IMM-Core
 
-**DOI:** https://doi.org/10.5281/zenodo.20507329
+**DOI (all versions):** https://doi.org/10.5281/zenodo.20507328
 
-**Status:** v1.0 published 2026-06-02 (Steps 1–7 done). For 1.1.0 and later follow "Publishing a new version" below.
+**Status:** v1.0 published 2026-06-02 (10.5281/zenodo.20507329, Steps 1–7 done); 1.1.0 published 2026-10-06 (10.5281/zenodo.23190815). For later versions follow "Publishing a new version" below.
 
 ---
 
@@ -80,11 +80,11 @@ Use `.zenodo.json` as your reference. Paste into the form:
 
 ## Publishing a new version (1.1.0 and later)
 
-Zenodo versions are immutable; a file change needs a new version with its own DOI. The concept DOI 10.5281/zenodo.20507329 keeps resolving to the latest version.
+Within 30 days after publication Zenodo allows small file corrections in the same record (the draft must be published within 45 days; the DOI stays). Later file changes need a new version with its own DOI. The concept DOI 10.5281/zenodo.20507328 keeps resolving to the latest version.
 
 1. Merge the release branch into `main`; CI must be green.
 2. From `main`, build the bundle (Step 3 with the new version number) and open the published record on Zenodo, then click **New version**.
-3. Upload the bundle (Step 4), fill the form from `.zenodo.json` (Step 5; version and description are already updated on `main`), preview and publish (Step 6).
+3. Upload the bundle (Step 4), fill the form from `.zenodo.json` (Step 5; version and description are already updated on `main`), including the Version field (an empty field shows as "v2"), preview and publish (Step 6).
 4. Post-publication: set `date-released` in `CITATION.cff`, `publication_date` in `.zenodo.json` and the date in the `CHANGELOG.md` heading to the Zenodo publication date; commit on `main` with message `chore: release 1.1.0, Zenodo publication date`; tag `v1.1.0` on that commit and push the tag.
 5. `.zenodo.json` and this guide stay out of the bundle.
 
@@ -122,15 +122,15 @@ git push origin v1.0
 - [x] Step 2: DOI filled in all files
 - [x] Step 3: bundle created
 - [x] Step 4: files uploaded
-- [x] Step 5: metadata form filled, communities applied
+- [x] Step 5: metadata form filled (no communities listed on the record as of 2026-10-06)
 - [x] Step 6: preview checked, published
 - [x] Step 7: working repo committed, badge added, `v1.0` tag pushed
 
 ### v1.1.0
 
-- [ ] Release branch merged into `main`, CI green
-- [ ] `imm-core-v1.1.0.zip` built from `main`
-- [ ] New version created on Zenodo, files uploaded, form filled from `.zenodo.json`
-- [ ] Preview checked, published
-- [ ] Dates set in `CITATION.cff`, `.zenodo.json`, `CHANGELOG.md`; commit on `main`
-- [ ] `v1.1.0` tag pushed
+- [x] Release branch merged into `main`, CI green
+- [x] `imm-core-v1.1.0.zip` built (tree identical to `main` at `ca0afb0`)
+- [x] New version created on Zenodo, files uploaded, form filled from `.zenodo.json`
+- [x] Preview checked, published
+- [x] Dates set in `CITATION.cff`, `.zenodo.json`, `CHANGELOG.md`; commit on `main`
+- [x] `v1.1.0` tag pushed

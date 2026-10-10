@@ -49,4 +49,4 @@ A withdrawn record SHOULD retain only the seven required fields (`record_id`, `i
 
 ## Note on GDPR alignment
 
-None of these terms maps 1:1 to a GDPR legal basis category. They describe what a participant consented to at the point of data collection, which is a layer above GDPR legal basis (typically Art. 6(1)(a) consent or Art. 9(2)(a) for sensitive data). Profiles targeting health research contexts should consider aligning with their national research ethics framework in addition to this vocabulary.
+None of these terms maps 1:1 to a GDPR legal basis category. They describe what a participant consented to at the point of data collection, which is a layer above GDPR legal basis (the legal basis is set by the controller and documented in the governance record that `governance_ref` points to). Profiles targeting health research contexts should consider aligning with their national research ethics framework in addition to this vocabulary.

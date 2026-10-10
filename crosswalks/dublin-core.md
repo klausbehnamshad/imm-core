@@ -1,6 +1,6 @@
 # Crosswalk: IMM-Core → Dublin Core Terms
 
-**IMM-Core version:** 1.0  
+**IMM-Core version:** 1.1.0  
 **Standard:** Dublin Core Metadata Terms (DCTERMS) — https://www.dublincore.org/specifications/dublin-core/dcmi-terms/
 
 ---
@@ -14,6 +14,7 @@
 | `interviewer` | `dcterms:contributor` | Acceptable | `dcterms:creator` is sometimes used, but the interviewer is usually a contributor rather than the intellectual author of the work |
 | `consent_status` | — | No clean mapping | DC has no consent property. Document alongside `accessRights` as a plain-text note in a `dcterms:rights` statement |
 | `accessRights` | `dcterms:accessRights` | Clean | |
+| `governance_ref` | — | Omit | Internal reference to the governance record; not exported |
 | `title` | `dcterms:title` | Clean | |
 | `interviewee_display` | `dcterms:subject` or `dcterms:contributor` | Lossy | Neither is satisfactory. `subject` works if the interviewee is the subject of the interview; `contributor` works if framing them as participant. Both are lossy. |
 | `language` | `dcterms:language` | Clean | DCMI recommends RFC 5646 (BCP 47), which uses the shortest available code. Exporters SHOULD convert ISO 639-3 to ISO 639-1 where one exists (`deu` → `de`); many DC implementations also accept 3-letter codes |

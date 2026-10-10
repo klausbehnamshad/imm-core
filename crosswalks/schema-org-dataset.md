@@ -1,6 +1,6 @@
 # Crosswalk: IMM-Core → Schema.org/Dataset
 
-**IMM-Core version:** 1.0  
+**IMM-Core version:** 1.1.0  
 **Standard:** Schema.org `Dataset` type — https://schema.org/Dataset
 
 ---
@@ -24,7 +24,8 @@ A Schema.org/Dataset mapping enables web-level findability via Google Dataset Se
 | `spatial` | `schema:spatialCoverage` | Type `schema:Place` with `schema:name` set to the IMM `spatial` string value |
 | `keywords` | `schema:keywords` | Comma-separated string or array; Schema.org accepts both |
 | `accessRights` | `schema:conditionsOfAccess` | Schema.org has no closed vocabulary here; pass the IMM string directly |
-| `consent_status` | — | No direct mapping. Document in a `schema:license` note or omit from Schema.org serialisation entirely. Do not attempt to map to `schema:license`. |
+| `consent_status` | — | No direct mapping; omit from the Schema.org serialisation. Do not map consent or governance information to `schema:license`. |
+| `governance_ref` | — | Internal reference to the governance record; omit. |
 | `related_materials` | `schema:hasPart` or `schema:distribution` | Use `schema:distribution` if the URL points to a downloadable file; `schema:hasPart` for related datasets or documents |
 | `timecoded_segments` | — | Not representable at Schema.org level; omit |
 | `interviewee_display` | `schema:about` (as `schema:Person`) | Optional and sensitive. Use only if `interviewee_display` is a public pseudonym used in publications, not a private code name. When in doubt, omit. |
@@ -43,8 +44,7 @@ A Schema.org/Dataset mapping enables web-level findability via Google Dataset Se
   "dateCreated": "2024-05-18",
   "creator": {
     "@type": "Person",
-    "name": "Klaus Behnam Shad",
-    "sameAs": "https://orcid.org/0000-0002-3601-9024"
+    "name": "Interviewer A"
   },
   "inLanguage": "de",
   "spatialCoverage": {
@@ -55,7 +55,7 @@ A Schema.org/Dataset mapping enables web-level findability via Google Dataset Se
   "conditionsOfAccess": "restricted",
   "distribution": {
     "@type": "DataDownload",
-    "contentUrl": "https://gitlab.uni.lu/c2dh/lhi/luxoh-cmdi/-/raw/main/data/transcript-LHI-0042.docx",
+    "contentUrl": "https://example.org/imm-example/transcript-0042.docx",
     "encodingFormat": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
   }
 }

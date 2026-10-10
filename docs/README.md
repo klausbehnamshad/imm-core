@@ -1,9 +1,9 @@
 # IMM-Core: Interview Metadata Model — Core Profile
 
-**Version:** 1.1.0 (unreleased; the DOI below resolves to the published v1.0)  
+**Version:** 1.1.0  
 **License:** CC-BY-4.0  
-**DOI:** 10.5281/zenodo.20507329  
-**Citation:** Behnam Shad, Klaus (2026). *IMM-Core: Interview Metadata Model — Core Profile* (v1.0). Zenodo. https://doi.org/10.5281/zenodo.20507329
+**DOI:** 10.5281/zenodo.23190815 (version 1.1.0); all versions: 10.5281/zenodo.20507328  
+**Citation:** Behnam Shad, Klaus (2026). *IMM-Core: Interview Metadata Model — Core Profile* (Version 1.1.0) [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.23190815
 
 ---
 
@@ -49,7 +49,7 @@ Four imperatives converge on minimality:
 
 **Cognitive simplicity.** A model that requires fifteen mandatory fields will not be consistently populated by interdisciplinary research teams, student researchers, or archivists under time pressure. Metadata that exists only in the schema and never in the records is worse than no schema, because it creates a false sense of coverage. The Core requires seven fields. This is not an accident.
 
-**Ethical clarity.** GDPR's principle of data minimisation applies to metadata about research participants as much as to the primary data itself. A metadata model that collects granular personal information about interviewees in the name of discoverability creates a privacy risk that no research benefit can straightforwardly justify. The Core's minimal speaker hook (`interviewee_display` — a pseudonym or display name) is minimised and pseudonymised and provides enough descriptive anchor for the record; whether it remains personal data is assessed in context (EDPB Guidelines 01/2025 on pseudonymisation, version for public consultation, paras 21–22; CJEU C-413/23 P, 4 September 2025, paras 77 and 86).
+**Ethical clarity.** GDPR's principle of data minimisation applies to metadata about research participants as much as to the primary data itself. A metadata model that collects granular personal information about interviewees in the name of discoverability creates a privacy risk that no research benefit can straightforwardly justify. The Core's minimal speaker hook (`interviewee_display` — a pseudonym or display name) is meant to hold a pseudonym and provides enough descriptive anchor for the record. Whether a pseudonymised value is personal data depends on who can attribute it with reasonable means (EDPB Guidelines 01/2025 on pseudonymisation, version for public consultation of 16 January 2025, paras 21–22; CJEU C-413/23 P, EDPS v SRB, 4 September 2025, paras 77 and 86, on Regulation 2018/1725).
 
 **Interoperability.** Fewer, better-defined fields crosswalk more cleanly to Dublin Core, Schema.org, and DataCite than many fields with ambiguous external mappings. Every Core field has a plausible external mapping; the crosswalk files in `crosswalks/` document where those mappings hold and where they break down.
 
@@ -63,11 +63,11 @@ The FAIR principles (Findable, Accessible, Interoperable, Reusable — Wilkinson
 
 **Findable.** `record_id` provides the stable unique identifier that FAIR F1 requires. `title`, `keywords`, and `abstract` support the rich metadata that F2 and F3 require. `language` and `spatial` enable filtering and scoped discovery.
 
-**Accessible.** `accessRights` (`open | restricted | closed`) declares the access condition (FAIR A1.2); the retrieval protocol (A1) and metadata persistence after data removal (A2) are properties of the hosting infrastructure, not of this field: data is accessible under well-defined conditions, even when those conditions include access controls. A `restricted` record is accessible — under specified terms — which is FAIR-compliant. A record with no `accessRights` declaration is not.
+**Accessible.** `accessRights` (`open | restricted | closed`) declares the access condition. FAIR A1 (retrieval by identifier over a standardised protocol), A1.2 (the protocol allows authentication and authorisation where necessary) and A2 (metadata remain accessible when the data are no longer available) are properties of the hosting infrastructure, which enforces the declared condition (GO FAIR Foundation, FAIR Principles, accessed 6 October 2026). A `restricted` record stays accessible under specified terms; a record without `accessRights` leaves the access condition undeclared.
 
 **Interoperable.** The crosswalk files document how Core fields map to Dublin Core, Schema.org, and QDPX. The JSON Schema enables machine-readable validation. The DCTAP profile provides a metadata-standard-agnostic specification of field semantics.
 
-**Reusable.** `consent_status` documents the participant-consent basis for reuse — a precondition for legally defensible secondary analysis. GDPR Art. 5(1)(c) requires that personal data be "adequate, relevant, and limited to what is necessary." The Core's minimality is a direct implementation of this principle.
+**Reusable.** `consent_status` documents the participant-consent basis for reuse — a precondition for legally defensible secondary analysis. GDPR Art. 5(1)(c) requires that personal data be "adequate, relevant, and limited to what is necessary." The Core keeps the field list short; whether a populated record is limited to what is necessary depends on the purpose and is decided per collection.
 
 Minimal metadata is not in tension with reusability. It is a precondition for *legally defensible* reusability. A research data record that collects unnecessary personal detail about participants may technically satisfy FAIR findability while creating GDPR liability. Data minimisation is a property of the populated record, not of the field list: `interviewer`, `spatial` and `interview_date` in combination can identify a person; profiles decide which combinations their collection may carry.
 
@@ -162,7 +162,7 @@ Any interview metadata record must cover four domains regardless of discipline o
 
 **Block D — Preservation.** File-format, master-copy, checksum, and access-copy fields. *Absent from Core v1.0 by design.* Block D is a profile-level concern: IMM-Profile-LuxOH adds it via its Block D extension. The Core's mandate stops at the descriptive-metadata layer; preservation metadata is infrastructure-specific and belongs in profiles.
 
-**Disclosure risk of descriptive fields.** Descriptive combinations can carry disclosure risk even when each field looks innocuous. Profiles SHOULD check three questions before allowing a combination: can a record single out a person? can it be linked to another source? can an attribute be inferred? (EDPB draft Guidelines 02/2026 on anonymisation, adopted July 2026, public consultation until 30 October 2026, status draft).
+**Disclosure risk of descriptive fields.** Descriptive combinations can carry disclosure risk even when each field looks innocuous. Profiles SHOULD check three questions before allowing a combination: can a record be isolated as relating to one person? can it be linked to another source? can an attribute be inferred? (EDPB Guidelines 02/2026 on anonymisation, version 1.0 for public consultation, adopted 7 July 2026, consultation until 30 October 2026; the guidelines name the criteria no record isolation, no linkage and no inference).
 
 ---
 
@@ -220,17 +220,20 @@ No IMM-Core field requires a specific institutional system. The model operates w
 
 ## 10. Governance and Versioning
 
-**Core versioning** uses Semantic Versioning (SemVer: `MAJOR.MINOR.PATCH`).
+**Core versioning** uses Semantic Versioning (SemVer: `MAJOR.MINOR.PATCH`) with one local deviation: a rule tightened on an existing field is released as MINOR and listed explicitly with its test fixtures.
 
 | Change type | Version impact |
 |---|---|
 | New required field; tightened `accessRights` enum; field removal | MAJOR |
 | New optional field; loosened optional-field constraint | MINOR |
+| Rule tightened on an existing field so that previously schema-valid records fail | MINOR, listed explicitly with the affected test fixtures |
 | Documentation or description correction without semantic change | PATCH |
+
+The schema's `$id` is a stable identifier within 1.x and is not meant to resolve as a URL; consumers pin the schema file by version or checksum.
 
 **DCTAP-as-SSoT.** `tap/core.csv` is authoritative. `schema/core.schema.json` is derived. If they diverge, the DCTAP is correct. `scripts/check_consistency.py` validates their consistency and runs in this repository's CI (`.github/workflows/validate.yml`).
 
-**Zenodo deposits are immutable snapshots.** Each Zenodo release is a tagged version. Breaking changes produce a new DOI on the new major version. `CHANGELOG.md` documents all changes between versions.
+**Zenodo deposits are versioned snapshots.** Each Zenodo release is a tagged version with its own version DOI; the concept DOI 10.5281/zenodo.20507328 resolves to the latest version. `CHANGELOG.md` documents all changes between versions.
 
 **Profile versioning.** Profiles are versioned independently from Core. Each profile declares the Core version it targets (e.g. `imm-core: "^1.0"`). A Core major-version bump does not automatically invalidate profiles, but profile maintainers must verify compatibility.
 
