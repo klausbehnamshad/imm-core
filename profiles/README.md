@@ -32,6 +32,8 @@ Each profile is identified by a short slug and named `IMM-Profile-{Slug}`. Regis
 
 To register a new profile: open a pull request adding a row above and a corresponding profile file in this directory.
 
+Collection-level restrictions (consent vocabulary, identifier code) that add no field are kept in tool configuration, see `docs/implementing.md`.
+
 ---
 
 ## Profile File Format

@@ -140,10 +140,10 @@ Any interview metadata record must cover four domains regardless of discipline o
 
 **Block A — Administrative.** Identity, provenance, and rights. Required: `record_id`, `interview_date`, `interviewer`, `consent_status`, `accessRights`. These five fields make the interview citable and rights-governable; no interview record is complete without them.
 
-- `record_id`: stable identifier. Recommended format `YYYY-MM-DD_{INSTITUTION_CODE}_{NNNN}`. Pattern not enforced at Core; profiles impose institution-specific patterns. *Not in Core by design:* no UUID mandate, no namespace registry — implementation policy belongs in profiles.
+- `record_id`: stable identifier. Recommended format `YYYY-MM-DD_{COLLECTION_CODE}_{NNNN}`. Pattern not enforced at Core; collections impose collection-specific patterns. The identifier is assigned once by the system that holds the collection; exports carry it unchanged and never generate a new one. *Not in Core by design:* no UUID mandate, no namespace registry — implementation policy belongs in profiles.
 - `interview_date`: ISO 8601 date (YYYY-MM-DD). *Not in Core:* date ranges, approximate dates — deferred to Phase 2.
-- `interviewer`: name string; ORCID in parentheses recommended. *Not in Core:* multi-interviewer objects, institutional affiliation — deferred to Phase 2.
-- `consent_status`: free string at Core; see `vocabs/consent_status.md` for recommended vocabulary. *No enum at Core:* discipline-specific consent regimes belong in profiles. One invariant holds everywhere: `withdrawn` implies `accessRights: closed`, enforced by the schema.
+- `interviewer`: name string; several persons are separated by `; `. ORCID in parentheses recommended. *Not in Core:* multi-interviewer objects, institutional affiliation — deferred to Phase 2.
+- `consent_status`: free string at Core; see `vocabs/consent_status.md` for recommended vocabulary. Collections keep their permitted values in tool configuration; see `docs/implementing.md`. *No enum at Core:* discipline-specific consent regimes belong in profiles. One invariant holds everywhere: `withdrawn` implies `accessRights: closed`, enforced by the schema.
 - `accessRights`: `open | restricted | closed`. *This enum is enforced at Core level* because it is genuinely cross-domain stable — OpenAIRE, Zenodo, and DataCite all use it — and is the minimum for machine-readable access governance.
 
 **Block B — Descriptive.** Content and context. Required: `title`, `language`. Optional: `interviewee_display`, `spatial`, `keywords`, `abstract`, `languages`.
@@ -151,14 +151,14 @@ Any interview metadata record must cover four domains regardless of discipline o
 - `title`: interview title or descriptive label.
 - `language`: main spoken language as ISO 639-3 three-letter code. For interviews with several spoken languages, list all of them in `languages`, which MUST contain this value.
 - `languages`: optional array of ISO 639-3 codes listing every spoken language of the interview. Spoken languages only: subtitle or translation languages go as WebVTT per language via `related_materials`, and there is no language per segment (Phase 2).
-- `interviewee_display`: pseudonym or display name. The Core's minimal speaker hook. *Not in Core by design:* demographics, life-history data — full speaker component deferred to Phase 2. Privacy-principled: the Core does not collect personal data about participants beyond the minimum for description.
+- `interviewee_display`: pseudonym or display name. The Core's minimal speaker hook. Several persons are separated by `; `. The value is never filled automatically from a real name; exports carry only what was deliberately entered here. *Not in Core by design:* demographics, life-history data — full speaker component deferred to Phase 2. Privacy-principled: the Core does not collect personal data about participants beyond the minimum for description.
 - `spatial`: place of interview, free string. *Not in Core:* controlled place-name lists — geography-specific, profile-level.
 - `keywords`: free string array. *Not in Core:* a specific controlled vocabulary — profile-level.
 - `abstract`: 2–3 sentence descriptive summary. See `methodological-positions/abstracts.md` for scope constraints. *Not in Core:* analytic content, codes, themes — above Core by design.
 
 **Block C — Structural.** Internal organisation. Both fields optional.
 
-- `timecoded_segments`: array of `{start, end, label}` objects in HH:MM:SS. Descriptive segmentation for navigation. *Not in Core:* analytic coding, transcription — QDPX territory.
+- `timecoded_segments`: array of `{start, end, label}` objects in HH:MM:SS. Chapter marks for navigation: labels describe a section, not a subtitle line; subtitles go as WebVTT per language via `related_materials`. Timecodes with frames are truncated to seconds by the producing system. *Not in Core:* analytic coding, transcription — QDPX territory.
 - `related_materials`: array of URL/DOI strings for transcripts, companion documents, derived files.
 
 **Block D — Preservation.** File-format, master-copy, checksum, and access-copy fields. *Absent from Core v1.0 by design.* Block D is a profile-level concern: IMM-Profile-LuxOH adds it via its Block D extension. The Core's mandate stops at the descriptive-metadata layer; preservation metadata is infrastructure-specific and belongs in profiles.

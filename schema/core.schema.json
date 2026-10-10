@@ -9,7 +9,7 @@
     "record_id": {
       "type": "string",
       "minLength": 1,
-      "description": "Block A. Stable identifier. Recommended format: YYYY-MM-DD_{INSTITUTION_CODE}_{NNNN}. Pattern not enforced at Core; see Implementation Profile for institution-specific constraints."
+      "description": "Block A. Stable identifier. Recommended format: YYYY-MM-DD_{COLLECTION_CODE}_{NNNN}. Pattern not enforced at Core; collections impose collection-specific patterns. Assigned once by the system that holds the collection; exports carry it unchanged and never generate a new one."
     },
     "interview_date": {
       "type": "string",
@@ -20,12 +20,12 @@
     "interviewer": {
       "type": "string",
       "minLength": 1,
-      "description": "Block A. Name(s) of the interviewer(s) as a single string. ORCID may follow each name in parentheses, e.g. 'Jane Smith (0000-0001-2345-6789)'. Multivalue interviewer objects deferred to Phase 2."
+      "description": "Block A. Name(s) of the interviewer(s) as a single string. Several persons are separated by '; '. ORCID may follow each name in parentheses, e.g. 'Jane Smith (0000-0001-2345-6789)'. Multivalue interviewer objects deferred to Phase 2."
     },
     "consent_status": {
       "type": "string",
       "minLength": 1,
-      "description": "Block A. Consent category recorded at data collection. Free string at Core; see vocabs/consent_status.md for recommended vocabulary. Implementation Profiles may impose a controlled enum."
+      "description": "Block A. Consent category recorded at data collection. Free string at Core; see vocabs/consent_status.md for recommended vocabulary. Implementation Profiles may impose a controlled enum. Collections keep their permitted values in tool configuration; see docs/implementing.md."
     },
     "accessRights": {
       "type": "string",
@@ -44,7 +44,7 @@
     },
     "interviewee_display": {
       "type": "string",
-      "description": "Block B. Pseudonym or display name. Core-level minimal speaker hook. Full speaker component deferred to Phase 2."
+      "description": "Block B. Pseudonym or display name. Core-level minimal speaker hook. Several persons are separated by '; '. Never filled automatically from a real name. Full speaker component deferred to Phase 2."
     },
     "language": {
       "type": "string",
@@ -76,7 +76,7 @@
     },
     "timecoded_segments": {
       "type": "array",
-      "description": "Block C. Array of segment objects with required sub-properties.",
+      "description": "Block C. Array of chapter-mark segment objects with required sub-properties. Labels describe a section (chapter mark), not a subtitle line; subtitles go as WebVTT per language via `related_materials`.",
       "items": {
         "type": "object",
         "additionalProperties": false,
