@@ -124,7 +124,7 @@ The recommended handoff convention — matching QDPX `<Source>` identifiers to I
 
 IMM-Core uses a two-layer architecture: a **Core Profile** and **Implementation Profiles**.
 
-**Core Profile** (this specification): generic, discipline-agnostic, methodologically neutral. Fourteen fields across three functional blocks (A–C); Block D is reserved for profiles. Seven required. No discipline-specific vocabularies enforced except `accessRights` (which is genuinely cross-domain stable). `tap/core.csv` is the single source of truth; `schema/core.schema.json` is the derived machine-readable mirror.
+**Core Profile** (this specification): generic, discipline-agnostic, methodologically neutral. Fifteen fields across three functional blocks (A–C); Block D is reserved for profiles. Seven required. No discipline-specific vocabularies enforced except `accessRights` (which is genuinely cross-domain stable). `tap/core.csv` is the single source of truth; `schema/core.schema.json` is the derived machine-readable mirror.
 
 **Implementation Profiles**: discipline-specific or institution-specific specialisations. Each profile is expressed as a DCTAP delta (only fields that differ from or are added to Core) and a JSON Schema fragment. Profiles may add fields, tighten constraints, and impose controlled vocabularies. Profiles may not remove Core-required fields, loosen the `accessRights` enum, or override Core field semantics.
 
@@ -136,7 +136,7 @@ Registered profiles and registration instructions are in `profiles/README.md`. T
 
 ## 6. The Four Functional Blocks
 
-Any interview metadata record must cover four domains regardless of discipline or serialisation format. IMM-Core organises its fourteen fields into Blocks A–C; Block D is defined here but populated only by Implementation Profiles:
+Any interview metadata record must cover four domains regardless of discipline or serialisation format. IMM-Core organises its fifteen fields into Blocks A–C; Block D is defined here but populated only by Implementation Profiles:
 
 **Block A — Administrative.** Identity, provenance, and rights. Required: `record_id`, `interview_date`, `interviewer`, `consent_status`, `accessRights`. These five fields make the interview citable and rights-governable; no interview record is complete without them.
 
@@ -146,10 +146,11 @@ Any interview metadata record must cover four domains regardless of discipline o
 - `consent_status`: free string at Core; see `vocabs/consent_status.md` for recommended vocabulary. *No enum at Core:* discipline-specific consent regimes belong in profiles. One invariant holds everywhere: `withdrawn` implies `accessRights: closed`, enforced by the schema.
 - `accessRights`: `open | restricted | closed`. *This enum is enforced at Core level* because it is genuinely cross-domain stable — OpenAIRE, Zenodo, and DataCite all use it — and is the minimum for machine-readable access governance.
 
-**Block B — Descriptive.** Content and context. Required: `title`, `language`. Optional: `interviewee_display`, `spatial`, `keywords`, `abstract`.
+**Block B — Descriptive.** Content and context. Required: `title`, `language`. Optional: `interviewee_display`, `spatial`, `keywords`, `abstract`, `languages`.
 
 - `title`: interview title or descriptive label.
-- `language`: ISO 639-3 three-letter code. Single language at Core; multilingual deferred to Phase 2.
+- `language`: main spoken language as ISO 639-3 three-letter code. For interviews with several spoken languages, list all of them in `languages`, which MUST contain this value.
+- `languages`: optional array of ISO 639-3 codes listing every spoken language of the interview. Spoken languages only: subtitle or translation languages go as WebVTT per language via `related_materials`, and there is no language per segment (Phase 2).
 - `interviewee_display`: pseudonym or display name. The Core's minimal speaker hook. *Not in Core by design:* demographics, life-history data — full speaker component deferred to Phase 2. Privacy-principled: the Core does not collect personal data about participants beyond the minimum for description.
 - `spatial`: place of interview, free string. *Not in Core:* controlled place-name lists — geography-specific, profile-level.
 - `keywords`: free string array. *Not in Core:* a specific controlled vocabulary — profile-level.
@@ -206,7 +207,7 @@ No IMM-Core field requires a specific institutional system. The model operates w
 
 **2. `consent_status` and `accessRights` are conflated.** These are distinct fields: `consent_status` records what the participant agreed to; `accessRights` records the repository's current access policy. They should be set independently. A record may have `consent_status: research-only` and `accessRights: open`, or `consent_status: public` and `accessRights: restricted` (pending review).
 
-**3. `language` is not ISO 639-3.** Using BCP 47 tags (`en`, `de`), two-letter ISO 639-1 codes, or natural-language names (`English`, `German`) instead of ISO 639-3 three-letter codes (`eng`, `deu`) breaks machine-readable filtering. The Core schema enforces a three-letter lowercase pattern.
+**3. `language` is not ISO 639-3.** Using BCP 47 tags (`en`, `de`), two-letter ISO 639-1 codes, or natural-language names (`English`, `German`) instead of ISO 639-3 three-letter codes (`eng`, `deu`) breaks machine-readable filtering. The Core schema enforces a three-letter lowercase pattern. Several spoken languages go into `languages`, not into a second record.
 
 **4. `record_id` is not stable.** Record identifiers must not be reassigned. If a record is revised, the `record_id` stays the same; revisions are documented in the record's own version history (e.g. the repository or catalogue that holds it), not in the IMM-Core `CHANGELOG.md`, which documents changes to the specification. Changing identifiers silently breaks external references and citations.
 
@@ -249,7 +250,7 @@ Phase 2 items address genuine layers of interview-metadata work that v1.0 delibe
 
 **Speaker component** (demographics, life-history fields, role). Deferred because: (a) speaker metadata is the highest-privacy layer of interview records; (b) what demographic fields are relevant varies sharply by discipline; (c) the Core's `interviewee_display` provides the minimal hook needed without prescribing the full component.
 
-**Multilingual interviews** (`language` as array; language-per-segment). Deferred because ISO 639-3 arrays and mixed-language segmentation require a more complex data structure than the current single-value field. Single-language interviews are the common case; the design for multi-language support should be validated against real multilingual corpora before being added.
+**Multilingual interviews.** Since 1.2.0 `languages` lists all spoken languages; language per segment remains Phase 2. Single-language interviews stay the common case: `language` carries the main language, and `languages` is only present when more than one language is spoken. Mixed-language segmentation and subtitle or translation languages are still deferred; the latter go as WebVTT per language via `related_materials`.
 
 **Transcript provenance** (ASR-generated vs. manual; human review status). Deferred because transcript-level metadata belongs closer to the transcript file itself than to the interview record, and the correct home (Core field vs. transcript sub-record vs. QDPX source metadata) requires design work. Note: IMM-Core v1.0 does not specify transcript provenance, but implementers working with ASR-generated or LLM-assisted transcripts should document the generation method in their institutional workflow metadata. Presenting AI-generated content as primary data without disclosure is an epistemic integrity issue regardless of schema version.
 

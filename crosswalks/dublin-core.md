@@ -1,6 +1,6 @@
 # Crosswalk: IMM-Core → Dublin Core Terms
 
-**IMM-Core version:** 1.1.0  
+**IMM-Core version:** 1.2.0 (unreleased)  
 **Standard:** Dublin Core Metadata Terms (DCTERMS) — https://www.dublincore.org/specifications/dublin-core/dcmi-terms/
 
 ---
@@ -18,6 +18,7 @@
 | `title` | `dcterms:title` | Clean | |
 | `interviewee_display` | `dcterms:subject` or `dcterms:contributor` | Lossy | Neither is satisfactory. `subject` works if the interviewee is the subject of the interview; `contributor` works if framing them as participant. Both are lossy. |
 | `language` | `dcterms:language` | Clean | DCMI recommends RFC 5646 (BCP 47), which uses the shortest available code. Exporters SHOULD convert ISO 639-3 to ISO 639-1 where one exists (`deu` → `de`); many DC implementations also accept 3-letter codes |
+| `languages` | `dcterms:language` | Clean | One `dcterms:language` element per value, same code conversion as `language` |
 | `spatial` | `dcterms:spatial` (refinement of `dcterms:coverage`) | Clean | Use `dcterms:spatial` specifically rather than the broader `coverage` |
 | `keywords` | `dcterms:subject` | Clean | Multiple `subject` elements; note that `interviewee_display` may also map here, creating a collision if not disambiguated |
 | `abstract` | `dcterms:description` | Clean | `dcterms:abstract` (a refinement) is more precise if the DC profile supports it |

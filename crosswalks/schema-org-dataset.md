@@ -1,6 +1,6 @@
 # Crosswalk: IMM-Core → Schema.org/Dataset
 
-**IMM-Core version:** 1.1.0  
+**IMM-Core version:** 1.2.0 (unreleased)  
 **Standard:** Schema.org `Dataset` type — https://schema.org/Dataset
 
 ---
@@ -21,6 +21,7 @@ A Schema.org/Dataset mapping enables web-level findability via Google Dataset Se
 | `title` | `schema:name` | |
 | `abstract` | `schema:description` | |
 | `language` | `schema:inLanguage` | Schema.org expects a BCP 47 tag. BCP 47 uses the shortest available code, so exporters SHOULD convert ISO 639-3 to ISO 639-1 where one exists (`deu` → `de`, `nld` → `nl`) and keep the 3-letter code otherwise (e.g. `ltz` → `lb`, but `gsw` stays `gsw`). |
+| `languages` | `schema:inLanguage` | Pass the full list as an array with the same conversion; the main language (`language`) comes first |
 | `spatial` | `schema:spatialCoverage` | Type `schema:Place` with `schema:name` set to the IMM `spatial` string value |
 | `keywords` | `schema:keywords` | Comma-separated string or array; Schema.org accepts both |
 | `accessRights` | `schema:conditionsOfAccess` | Schema.org has no closed vocabulary here; pass the IMM string directly |

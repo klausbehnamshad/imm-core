@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://doi.org/10.5281/zenodo.20507329/schema/core.schema.json",
   "title": "IMM-Core: Interview Metadata Model — Core Profile",
-  "description": "IMM-Core v1.1. Generic, discipline-agnostic metadata schema for interview-based qualitative research. Implementation Profiles (e.g. IMM-Profile-LuxOH, IMM-Profile-Migration) extend this Core without weakening its constraints. Core fields occupy three blocks (A Administrative, B Descriptive, C Structural); Block D (preservation fields) and full speaker components are deferred to Phase 2. Single source of truth: tap/core.csv.",
+  "description": "IMM-Core v1.2. Generic, discipline-agnostic metadata schema for interview-based qualitative research. Implementation Profiles (e.g. IMM-Profile-Migration) extend this Core without weakening its constraints. Core fields occupy three blocks (A Administrative, B Descriptive, C Structural); Block D (preservation fields) and full speaker components are deferred to Phase 2. Single source of truth: tap/core.csv.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
@@ -49,7 +49,17 @@
     "language": {
       "type": "string",
       "pattern": "^[a-z]{3}$",
-      "description": "Block B. ISO 639-3 three-letter language code, e.g. 'eng', 'deu', 'fra'. Single language only at Core; multilingual interviews deferred to Phase 2."
+      "description": "Block B. ISO 639-3 three-letter language code, e.g. 'eng', 'deu', 'fra'. Main language of the interview. For several spoken languages see `languages`."
+    },
+    "languages": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z]{3}$"
+      },
+      "description": "Block B. Spoken languages of the interview as ISO 639-3 codes. MUST contain the value of `language`; checked by tools/validate.py, not by this schema. Spoken languages only, no subtitle or translation languages."
     },
     "spatial": {
       "type": "string",

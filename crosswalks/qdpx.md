@@ -1,6 +1,6 @@
 # Crosswalk: IMM-Core ↔ REFI-QDA / QDPX
 
-**IMM-Core version:** 1.0  
+**IMM-Core version:** 1.2.0 (unreleased)  
 **Standard:** REFI-QDA Project Exchange Format (QDPX) — https://www.qdasoftware.org/
 
 ---
@@ -23,7 +23,7 @@ A complete qualitative research data package may use both: IMM-Core records desc
 | Interview identity (ID, date, title) | ✓ | ✗ | QDPX references source files but does not carry interview-level bibliographic or administrative metadata |
 | Interviewer | ✓ | ✗ | |
 | Consent and access rights | ✓ | ✗ | Rights are descriptive metadata, not analytic data |
-| Language | ✓ (ISO 639-3 at source level) | ✓ (language codes on sources and code items) | Both may carry language codes; IMM-Core is authoritative for the source object |
+| Language | ✓ (ISO 639-3 at source level; `languages` lists all spoken languages) | ✓ (language codes on sources and code items) | Both may carry language codes; IMM-Core is authoritative for the source object |
 | Keywords | ✓ (descriptive, pre-analytic subject terms) | ✓ (codes as analytic categories) | Conceptually different: IMM-Core keywords describe the interview; QDPX codes interpret it. Do not conflate. |
 | Abstract | ✓ (descriptive, non-analytic) | ✗ | |
 | Timecoded segments | ✓ (structural segmentation — descriptive) | ✓ (coded segments — analytically motivated) | IMM-Core segments are structural/descriptive (e.g. thematic blocks for navigation); QDPX segments are analytic (coded passages). They may overlap spatially but are not equivalent. |
