@@ -28,11 +28,11 @@ This file provides a cross-domain reference vocabulary. Implementation Profiles 
 
 ---
 
-## Adoption by registered profiles
+## Adoption by collections and profiles
 
-| Profile | Terms in use |
+| Collection or profile | Terms in use |
 |---|---|
-| IMM-Profile-LuxOH | `research-only` \| `teaching` \| `public` \| `embargoed` \| `withdrawn` |
+| C²DH oral history collections (tool configuration) | `research-only` \| `teaching` \| `public` \| `embargoed` \| `withdrawn` |
 | IMM-Profile-Migration | `broad-research` \| `specific-project-only` \| `withdrawn` |
 
 ---

@@ -1,5 +1,5 @@
 {
-  "record_id": "2024-05-18_LHI_0042",
+  "record_id": "2024-05-18_OHX_0042",
   "interview_date": "2024-05-18",
   "interviewer": "Interviewer A",
   "consent_status": "research-only",
@@ -26,5 +26,5 @@
   "related_materials": [
     "https://doi.org/10.5555/imm-example-0042"
   ],
-  "governance_ref": "urn:example:governance:lhi-0042"
+  "governance_ref": "urn:example:governance:ohx-0042"
 }

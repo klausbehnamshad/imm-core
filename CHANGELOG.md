@@ -7,6 +7,34 @@ Format: [Semantic Versioning](https://semver.org/). Breaking changes are marked 
 
 ## [Unreleased]
 
+Intended release: 1.2.0 (MINOR): one new optional field (`languages`); no field removed, no new required field, `language` stays a single string. Entries before 1.2.0 use the profile names of their time; the institutional profile lapses with 1.2.0 and its earlier descriptions are historical statements. No new DOI or publication is claimed here; the citations below name the last published version (1.1.0) as such.
+
+### Added
+
+- `languages` (Block B, optional): array of ISO 639-3 codes listing every spoken language of the interview; `minItems: 1`, `uniqueItems: true`, MUST contain the value of `language` (checked by `tools/validate.py`, rule R2). Spoken languages only: no subtitle or translation languages, no language per segment.
+- Schema fixtures: `tests/invalid/languages-not-a-code.json`, `tests/invalid/languages-empty.json`, `tests/invalid/languages-duplicate.json`, `tests/invalid/languages-wrong-type.json`, `tests/invalid/timecode-minute-61.json`, `tests/invalid/timecode-second-60.json`.
+
+### Changed
+
+- `record_id`: collection wording (`{COLLECTION_CODE}`, collection-specific patterns); assigned once by the system that holds the collection, carried unchanged by exports. Existing identifiers stay valid; no global date pattern.
+- `interviewer` and `interviewee_display`: several persons separated by `; `. `interviewee_display` is never filled automatically from a real name. A comma alone proves no person list (rule R5 warns only).
+- `timecoded_segments`: chapter marks; subtitles go as WebVTT per language via `related_materials`; frames are truncated to seconds by the producing system. Timecode minutes and seconds range 00–59 in TAP note and schema.
+- `consent_status`: collections keep their permitted values in tool configuration (`docs/implementing.md`); the Core stays a free string and `withdrawn` still implies `accessRights: closed`.
+- Documentation: Block B lists `languages`; §9 names the `languages` error; §11 describes multilingual handling since 1.2.0; `vocabs/consent_status.md` lists `languages` among the fields a withdrawn record SHOULD drop. Field count is now fifteen in `README.md`, `docs/README.md` (§5, §6) and `.zenodo.json`.
+- `examples/core-luxoh.json` is now `examples/core-oral-history.json` with invented collection code (`record_id` `2024-05-18_OHX_0042`, `governance_ref` `urn:example:governance:ohx-0042`) and a valid `languages` pair.
+- Crosswalks: Dublin Core, Schema.org and QDPX carry the `languages` mapping and the `1.2.0 (unreleased)` head; the Schema.org example uses the new example identifier.
+- `.zenodo.json`: notes say "versioned snapshot"; the predecessor `related_identifiers` entry is removed. `CITATION.cff` abstract no longer names the lapsed profile. Version, dates and DOIs stay at the published 1.1.0 until the separate release.
+
+### Removed
+
+- `profiles/luxoh-cmdi.md`: the institutional profile lapses; collections use the Core with tool configuration. The historical entries below keep their names.
+
+### Implementers
+
+- Consumers with `additionalProperties: false` and the old schema reject records carrying `languages`; they need their own upgrade path.
+- Tighter timecode (00–59) and blank-text checks can hold back faulty records that earlier validators accepted.
+- Raw schema validation does not enforce the cross-field `languages` rule; run `tools/validate.py`.
+
 ### Documentation
 
 - Citation metadata after the Zenodo publication of 1.1.0: `CITATION.cff` and the citation lines in `README.md` and `docs/README.md` cite version 1.1.0 (10.5281/zenodo.23190815); the concept DOI for all versions is 10.5281/zenodo.20507328. 10.5281/zenodo.20507329 is the DOI of version 1.0 and stays with it.

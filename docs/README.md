@@ -35,7 +35,7 @@ This is not merely a technical observation. Metadata is the scaffold that transf
 
 IMM-Core is a minimal metadata model for interview-based qualitative research. It is designed to be generic across disciplines — oral history, sociology, anthropology, education, migration studies, health research, political science — and agnostic with respect to qualitative data analysis (QDA) tradition. It does this by occupying a precise niche: the *descriptive metadata layer*, the level at which the interview is described as a research object, prior to and independently of whatever analytic work is done on it.
 
-The model has two layers. The **Core Profile** (this document) specifies the generic, discipline-agnostic minimum. **Implementation Profiles** specialise the Core for particular disciplines or institutions by adding fields, imposing controlled vocabularies, and tightening constraints. IMM-Profile-LuxOH (C²DH, University of Luxembourg) is one such Implementation Profile; IMM-Core was generalised from its institutional predecessor model (see `profiles/luxoh-cmdi.md`).
+The model has two layers. The **Core Profile** (this document) specifies the generic, discipline-agnostic minimum. **Implementation Profiles** specialise the Core for particular disciplines or institutions by adding fields, imposing controlled vocabularies, and tightening constraints. IMM-Core was generalised from an institutional oral history model at C²DH.
 
 ---
 
@@ -85,7 +85,7 @@ Dublin Core Metadata Terms (DCTERMS) provides the semantic baseline from which I
 
 ### 4.2 CMDI
 
-The Component Metadata Infrastructure (CMDI), developed within the CLARIN research infrastructure, provides a modular component framework for language-resource metadata. IMM-Profile-LuxOH was originally developed as a CMDI-compatible profile, and the modular logic of CMDI — components can be combined, constrained, and specialised — directly informs IMM-Core's two-layer architecture. An institution with CLARIN infrastructure can express an IMM-Core Implementation Profile as a CMDI component; an institution without that infrastructure can implement the same profile as a JSON Schema and a DCTAP file.
+The Component Metadata Infrastructure (CMDI), developed within the CLARIN research infrastructure, provides a modular component framework for language-resource metadata. The predecessor model was developed as a CMDI-compatible profile, and the modular logic of CMDI — components can be combined, constrained, and specialised — directly informs IMM-Core's two-layer architecture. An institution with CLARIN infrastructure can express an IMM-Core Implementation Profile as a CMDI component; an institution without that infrastructure can implement the same profile as a JSON Schema and a DCTAP file.
 
 **Boundary.** CMDI as a whole requires a CLARIN Centre or equivalent institutional host for component registration, schema deployment, and VLO harvesting. IMM-Core borrows the modular logic without requiring the full CMDI stack.
 
@@ -161,7 +161,7 @@ Any interview metadata record must cover four domains regardless of discipline o
 - `timecoded_segments`: array of `{start, end, label}` objects in HH:MM:SS. Chapter marks for navigation: labels describe a section, not a subtitle line; subtitles go as WebVTT per language via `related_materials`. Timecodes with frames are truncated to seconds by the producing system. *Not in Core:* analytic coding, transcription — QDPX territory.
 - `related_materials`: array of URL/DOI strings for transcripts, companion documents, derived files.
 
-**Block D — Preservation.** File-format, master-copy, checksum, and access-copy fields. *Absent from Core v1.0 by design.* Block D is a profile-level concern: IMM-Profile-LuxOH adds it via its Block D extension. The Core's mandate stops at the descriptive-metadata layer; preservation metadata is infrastructure-specific and belongs in profiles.
+**Block D — Preservation.** File-format, master-copy, checksum, and access-copy fields. *Absent from Core v1.0 by design.* Block D is a profile-level concern: no registered profile currently defines Block D; repositories such as Dataverse record file format and checksum per file. The Core's mandate stops at the descriptive-metadata layer; preservation metadata is infrastructure-specific and belongs in profiles.
 
 **Disclosure risk of descriptive fields.** Descriptive combinations can carry disclosure risk even when each field looks innocuous. Profiles SHOULD check three questions before allowing a combination: can a record be isolated as relating to one person? can it be linked to another source? can an attribute be inferred? (EDPB Guidelines 02/2026 on anonymisation, version 1.0 for public consultation, adopted 7 July 2026, consultation until 30 October 2026; the guidelines name the criteria no record isolation, no linkage and no inference).
 
@@ -195,7 +195,7 @@ IMM-Core fields are populated incrementally across the research pipeline. The mo
 
 **Project lead.** Validates Block A against project-level consent documentation. Confirms `accessRights` against institutional agreements. Reviews `abstract` for inadvertent re-identification risk.
 
-**Repository manager.** Validates the complete record against the relevant schema (Core or profile). Assigns or confirms `record_id` if the institution manages identifiers centrally. Deposits to repository. Adds Block D preservation fields if the Implementation Profile (e.g. IMM-Profile-LuxOH) requires them.
+**Repository manager.** Validates the complete record against the relevant schema (Core or profile). Assigns or confirms `record_id` if the institution manages identifiers centrally. Deposits to repository. Adds Block D preservation fields if the Implementation Profile requires them. See `docs/implementing.md` for the export rules and tool calls behind collection deposit.
 
 No IMM-Core field requires a specific institutional system. The model operates with any workflow that can produce a JSON record and validate it against a JSON Schema.
 
@@ -238,7 +238,7 @@ The schema's `$id` is a stable identifier within 1.x and is not meant to resolve
 
 **Profile versioning.** Profiles are versioned independently from Core. Each profile declares the Core version it targets (e.g. `imm-core: "^1.0"`). A Core major-version bump does not automatically invalidate profiles, but profile maintainers must verify compatibility.
 
-**Governance.** In v1.0, Klaus Behnam Shad (C²DH, University of Luxembourg) is the sole author and maintainer. Community governance (steering group, RFC process, public GitHub mirror) is scheduled for Phase 2 once the Core has been adopted by at least two independent Implementation Profiles outside the original institutional context.
+**Governance.** In v1.0, Klaus Behnam Shad (C²DH, University of Luxembourg) is the sole author and maintainer. Community governance (steering group, RFC process) is scheduled for Phase 2 once the Core has been adopted by at least two independent Implementation Profiles outside the original institutional context.
 
 ---
 
@@ -246,7 +246,7 @@ The schema's `$id` is a stable identifier within 1.x and is not meant to resolve
 
 Phase 2 items address genuine layers of interview-metadata work that v1.0 deliberately defers. Each is deferred not because it is unimportant, but because the design choices it requires are not yet stable across disciplines.
 
-**Block D — Preservation fields** (`file_format`, `master`, `access_copy`, `checksum`). Deferred because they are infrastructure-specific: what counts as a master copy and how checksums are generated depends on institutional systems (CatDV, Dataverse, DSpace). Already implemented in IMM-Profile-LuxOH as a profile-level extension.
+**Block D — Preservation fields** (`file_format`, `master`, `access_copy`, `checksum`). Deferred because they are infrastructure-specific: what counts as a master copy and how checksums are generated depends on institutional systems (CatDV, Dataverse, DSpace). No registered profile currently defines these fields; they remain a profile-level extension point.
 
 **Speaker component** (demographics, life-history fields, role). Deferred because: (a) speaker metadata is the highest-privacy layer of interview records; (b) what demographic fields are relevant varies sharply by discipline; (c) the Core's `interviewee_display` provides the minimal hook needed without prescribing the full component.
 
@@ -256,6 +256,6 @@ Phase 2 items address genuine layers of interview-metadata work that v1.0 delibe
 
 **Recording-context fields** (setting structure, group composition, interactional atmosphere). Deferred because this is the most tradition-specific layer — essential for documentary method (Bohnsack), much less relevant for IPA. A Phase 2 design should involve consultation with communities using Bohnsack's framework and related approaches.
 
-**Community governance** (steering group, RFC process, public GitHub mirror). Deferred until the Core has been adopted by at least two independent Implementation Profiles. The Zenodo deposit is the first step toward community infrastructure.
+**Community governance** (steering group, RFC process). Deferred until the Core has been adopted by at least two independent Implementation Profiles. The Zenodo deposit is the first step toward community infrastructure.
 
 Deferral is a stance, not a delay.

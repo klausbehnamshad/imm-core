@@ -26,7 +26,7 @@ zip -r imm-core-v1.1.0.zip \
   README.md LICENSE CITATION.cff CHANGELOG.md \
   tap/core.csv schema/core.schema.json \
   vocabs/ profiles/ crosswalks/ \
-  examples/core-generic.json examples/core-luxoh.json examples/core-minimal.json \
+  examples/core-generic.json examples/core-oral-history.json examples/core-minimal.json \
   methodological-positions/ docs/
 ```
 
@@ -59,7 +59,6 @@ Use `.zenodo.json` as your reference. Paste into the form:
 | **Version** | 1.1.0 (the value in .zenodo.json) |
 | **Publication date** | today |
 | **Keywords** | interview metadata; qualitative research; oral history; metadata model; FAIR data; GDPR; DCTAP; JSON Schema; Dublin Core; REFI-QDA; QDPX; schema.org; minimal metadata; research data management |
-| **Related identifier** | `https://gitlab.uni.lu/c2dh/lhi/luxoh-cmdi` · relation: *is supplemented by* · type: Dataset |
 | **Notes** | DCTAP-as-SSoT: tap/core.csv is authoritative; schema/core.schema.json is a derived artefact. Working repository: https://github.com/klausbehnamshad/imm-core |
 
 **Communities** — apply via the Communities tab (applications are reviewed; approval can happen post-publication):
