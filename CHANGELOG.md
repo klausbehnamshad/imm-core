@@ -1,7 +1,7 @@
 # Changelog — IMM-Core
 
 All notable changes to IMM-Core are documented here.  
-Format: [Semantic Versioning](https://semver.org/). Breaking changes are marked **[BREAKING]**. One local deviation from strict SemVer: a rule tightened on an existing field is released as MINOR and listed under Schema with its test fixtures (see Versioning policy below).
+Format: [Semantic Versioning](https://semver.org/). Breaking changes are marked **[BREAKING]**. One local deviation from strict SemVer: a rule tightened on an existing field is released as MINOR and listed explicitly with its test fixtures (see Versioning policy below).
 
 ---
 
@@ -16,12 +16,13 @@ Format: [Semantic Versioning](https://semver.org/). Breaking changes are marked 
 - `tap/core.csv` and `schema/core.schema.json`: `consent_status` description no longer calls the value a GDPR-based category (description only, no rule change).
 - Crosswalks: `governance_ref` is an internal reference and is omitted from Dublin Core and Schema.org exports; the Schema.org example uses a synthetic interviewer and an example.org address.
 - `ZENODO-PUBLISHING-GUIDE.md`: DOI roles, 30-day file correction window, version field, 1.1.0 checklist.
+- Naming: `CITATION.cff`, `.zenodo.json`, `docs/README.md` and `profiles/luxoh-cmdi.md` refer to the institutional predecessor model instead of its former name; file names and URLs are unchanged.
 
 ## [1.1.0] — 2026-10-06
 
 Zenodo: https://doi.org/10.5281/zenodo.23190815 (this version); all versions: https://doi.org/10.5281/zenodo.20507328.
 
-Consistency and correctness fixes. One optional field is added (`governance_ref`). No field is removed or renamed. The schema now enforces that required strings and `keywords` entries are non-empty, that `interview_date` has the form YYYY-MM-DD also in validators without format checking, and that `withdrawn` implies `accessRights: closed`. Records that relied on an empty required string, an empty `keywords` entry, `withdrawn` without `closed`, or (in validators without format checking) another date form validated against the published v1.0 schema and no longer do. `tests/invalid/empty-title.json` and `tests/invalid/withdrawn-not-closed.json` document the first two cases; the fixtures for the other two (`tests/invalid/keywords-empty-item.json`, `tests/invalid/date-wrong-shape.json`) were added after the release (see Unreleased).
+Consistency and correctness fixes. One optional field is added (`governance_ref`). No field is removed or renamed. The schema now enforces that required strings and `keywords` entries are non-empty, that `interview_date` has the form YYYY-MM-DD also in validators without format checking, and that `withdrawn` implies `accessRights: closed`. Records that relied on an empty required string, an empty `keywords` entry, `withdrawn` without `closed`, or (in validators without format checking) another date form validated against the published v1.0 schema and no longer do. `tests/invalid/empty-title.json` and `tests/invalid/withdrawn-not-closed.json` document the empty-string and withdrawal cases; the fixtures for the empty-keyword and date-form cases (`tests/invalid/keywords-empty-item.json`, `tests/invalid/date-wrong-shape.json`) were added after the release (see Unreleased).
 
 ### Added
 

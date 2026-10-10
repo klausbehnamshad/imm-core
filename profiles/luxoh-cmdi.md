@@ -3,13 +3,13 @@
 | | |
 |---|---|
 | **Slug** | `LuxOH` |
-| **Full name** | Luxembourg Oral History — CMDI Profile |
+| **Full name** | Luxembourg Oral History Profile |
 | **Discipline** | Oral history |
 | **Institution** | C²DH, University of Luxembourg |
 | **IMM-Core target** | `^1.0` |
 | **Profile version** | `1.1` |
 | **Maintainer** | Luxembourg Centre for Contemporary and Digital History (C²DH) |
-| **Canonical implementation** | [LuxOH-CMDI on GitLab](https://gitlab.uni.lu/c2dh/lhi/luxoh-cmdi) |
+| **Canonical implementation** | [Institutional repository on GitLab (C²DH)](https://gitlab.uni.lu/c2dh/lhi/luxoh-cmdi) |
 
 ---
 
@@ -88,8 +88,8 @@ This profile does not restate Core fields. All seven Core-required fields (`reco
 
 ---
 
-## Relationship to LuxOH-CMDI v1.1
+## Relationship to the institutional predecessor model
 
-LuxOH-CMDI v1.1 (hosted on GitLab) is the canonical **institutional implementation** of this profile. The GitLab repository contains: CI/CD validation pipelines, training materials and instructor checklists, CatDV/Dataverse integration scripts, and Luxembourg-specific data-management procedures. This profile file documents the *metadata specification*; the GitLab repository documents the *operational workflow*. When this profile and the GitLab repo diverge, the GitLab repo is authoritative for operational questions; this profile is authoritative for field semantics.
+The institutional predecessor model, version 1.1 (hosted on GitLab at C²DH), is the canonical **institutional implementation** of this profile. The GitLab repository contains: CI/CD validation pipelines, training materials and instructor checklists, CatDV/Dataverse integration scripts, and Luxembourg-specific data-management procedures. This profile file documents the *metadata specification*; the GitLab repository documents the *operational workflow*. When this profile and the GitLab repo diverge, the GitLab repo is authoritative for operational questions; this profile is authoritative for field semantics.
 
-The key generalisation from LuxOH v1.1 to IMM-Core is that Block D fields and the `record_id` LHI pattern, which were baked into the v1.1 schema, are now profile-level constraints. A Core record is valid without them; a LuxOH record must conform to both Core and this delta.
+The key generalisation from the predecessor model (version 1.1) to IMM-Core is that Block D fields and the `record_id` LHI pattern, which were baked into the predecessor's schema, are now profile-level constraints. A Core record is valid without them; a LuxOH record must conform to both Core and this delta.

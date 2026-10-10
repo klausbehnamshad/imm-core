@@ -35,7 +35,7 @@ This is not merely a technical observation. Metadata is the scaffold that transf
 
 IMM-Core is a minimal metadata model for interview-based qualitative research. It is designed to be generic across disciplines — oral history, sociology, anthropology, education, migration studies, health research, political science — and agnostic with respect to qualitative data analysis (QDA) tradition. It does this by occupying a precise niche: the *descriptive metadata layer*, the level at which the interview is described as a research object, prior to and independently of whatever analytic work is done on it.
 
-The model has two layers. The **Core Profile** (this document) specifies the generic, discipline-agnostic minimum. **Implementation Profiles** specialise the Core for particular disciplines or institutions by adding fields, imposing controlled vocabularies, and tightening constraints. IMM-Profile-LuxOH (formerly LuxOH-CMDI) — the Luxembourg oral history institutional model from which IMM-Core was generalised — is one such Implementation Profile (see `profiles/luxoh-cmdi.md`).
+The model has two layers. The **Core Profile** (this document) specifies the generic, discipline-agnostic minimum. **Implementation Profiles** specialise the Core for particular disciplines or institutions by adding fields, imposing controlled vocabularies, and tightening constraints. IMM-Profile-LuxOH (C²DH, University of Luxembourg) is one such Implementation Profile; IMM-Core was generalised from its institutional predecessor model (see `profiles/luxoh-cmdi.md`).
 
 ---
 

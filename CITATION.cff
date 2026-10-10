@@ -9,7 +9,7 @@ license: CC-BY-4.0
 abstract: >
   A generic, openly published minimal metadata model for interview-based
   qualitative research. Discipline-agnostic two-layer architecture: Core Profile
-  (generic) plus Implementation Profiles (specialisations). IMM-Profile-LuxOH (formerly LuxOH-CMDI) is the
+  (generic) plus Implementation Profiles (specialisations). IMM-Profile-LuxOH is the
   first registered Implementation Profile.
 authors:
   - family-names: "Behnam Shad"

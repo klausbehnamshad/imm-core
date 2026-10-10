@@ -129,7 +129,7 @@ git push origin v1.0
 ### v1.1.0
 
 - [x] Release branch merged into `main`, CI green
-- [x] `imm-core-v1.1.0.zip` built (tree identical to `main` at `ca0afb0`)
+- [x] `imm-core-v1.1.0.zip` built from `main` at `ca0afb0` (files byte-identical)
 - [x] New version created on Zenodo, files uploaded, form filled from `.zenodo.json`
 - [x] Preview checked, published
 - [x] Dates set in `CITATION.cff`, `.zenodo.json`, `CHANGELOG.md`; commit on `main`
