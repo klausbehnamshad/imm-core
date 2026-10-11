@@ -1,0 +1,34 @@
+{
+  "record_id": "2025-06-01_OHX_0042",
+  "interview_date": "2025-06-01",
+  "interviewer": "Jane Smith (0000-0001-2345-6789); John Doe",
+  "title": "Interview on work and migration",
+  "consent_status": "public",
+  "accessRights": "open",
+  "language": "deu",
+  "languages": [
+    "deu",
+    "ltz"
+  ],
+  "spatial": "Esch-sur-Alzette",
+  "keywords": [
+    "work",
+    "migration"
+  ],
+  "abstract": "The narrator describes work and migration experiences in two languages.",
+  "timecoded_segments": [
+    {
+      "start": "00:00:00",
+      "end": "00:04:12",
+      "label": "Arrival and first job"
+    }
+  ],
+  "related_materials": [
+    "https://doi.org/10.5555/imm-example-0042",
+    "https://example.org/files/transcript.pdf?download=1#page=2",
+    "http://example.org/plain",
+    "https://elsewhere.org/file.pdf",
+    "https://user@example.org/file.pdf"
+  ],
+  "governance_ref": "urn:example:governance:synth-0042"
+}
