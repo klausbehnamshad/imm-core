@@ -7,7 +7,13 @@ Format: [Semantic Versioning](https://semver.org/). Breaking changes are marked 
 
 ## [Unreleased]
 
-Intended release: 1.2.0 (MINOR): one new optional field (`languages`); no field removed, no new required field, `language` stays a single string. Entries before 1.2.0 use the profile names of their time; the institutional profile lapses with 1.2.0 and its earlier descriptions are historical statements. No new DOI or publication is claimed here; the citations below name the last published version (1.1.0) as such.
+---
+
+## [1.2.0] — 2026-10-11
+
+Zenodo: https://doi.org/10.5281/zenodo.23295846 (this version); all versions: https://doi.org/10.5281/zenodo.20507328.
+
+MINOR release: one new optional field (`languages`); no field removed, no new required field, `language` stays a single string. Entries before 1.2.0 use the profile names of their time; the institutional profile lapses with 1.2.0 and its earlier descriptions are historical statements.
 
 ### Added
 
@@ -22,8 +28,8 @@ Intended release: 1.2.0 (MINOR): one new optional field (`languages`); no field 
 - `consent_status`: collections keep their permitted values in tool configuration (`docs/implementing.md`); the Core stays a free string and `withdrawn` still implies `accessRights: closed`.
 - Documentation: Block B lists `languages`; §9 names the `languages` error; §11 describes multilingual handling since 1.2.0; `vocabs/consent_status.md` lists `languages` among the fields a withdrawn record SHOULD drop. Field count is now fifteen in `README.md`, `docs/README.md` (§5, §6) and `.zenodo.json`.
 - `examples/core-luxoh.json` is now `examples/core-oral-history.json` with invented collection code (`record_id` `2024-05-18_OHX_0042`, `governance_ref` `urn:example:governance:ohx-0042`) and a valid `languages` pair.
-- Crosswalks: Dublin Core, Schema.org and QDPX carry the `languages` mapping and the `1.2.0 (unreleased)` head; the Schema.org example uses the new example identifier.
-- `.zenodo.json`: notes say "versioned snapshot"; the predecessor `related_identifiers` entry is removed. `CITATION.cff` abstract no longer names the lapsed profile. Version, dates and DOIs stay at the published 1.1.0 until the separate release.
+- Crosswalks: Dublin Core, Schema.org and QDPX carry the `languages` mapping and the `1.2.0` head; the Schema.org example uses the new example identifier.
+- `.zenodo.json`: notes say "versioned snapshot"; the predecessor `related_identifiers` entry is removed. `CITATION.cff` abstract no longer names the lapsed profile. Version, date and version DOI are set to 1.2.0 in the release commit.
 
 ### Removed
 
@@ -52,7 +58,7 @@ Intended release: 1.2.0 (MINOR): one new optional field (`languages`); no field 
 - Crosswalks: `governance_ref` is an internal reference and is omitted from Dublin Core and Schema.org exports; the Schema.org example uses a synthetic interviewer and an example.org address.
 - `ZENODO-PUBLISHING-GUIDE.md`: DOI roles, 30-day file correction window, version field, 1.1.0 checklist.
 - `tools/data/LICENSE-dataverse.md`: verbatim copy of the Dataverse source licence (IQSS/dataverse `LICENSE.md` at commit `cc6e62e3354492ad1f4127adc64eb22445319b95`, 192 lines, SHA-256 `194b865caa806471273cfccebabfcd8c5094297f0e31a5ab8ff2155c6f86f64c`); the language table header and the release packaging lists reference it. Own model and code licence unchanged (CC-BY-4.0).
-- `README.md` and `docs/README.md`: development marked as `1.2.0 (unreleased)`; citation and DOI of the last published version 1.1.0 named as such.
+- Release: `README.md` rewritten for Digital Humanities readers (source criticism, stable identity, multilingual interviews, governed reuse, relation to Dublin Core, CLARIN CMDI and REFI-QDA) with credits naming Klaus Behnam Shad as designer and builder and the AI tools that assisted; `README.md`, `docs/README.md`, `CITATION.cff`, `.zenodo.json` and the four crosswalk heads carry version 1.2.0, date 2026-10-11 and version DOI 10.5281/zenodo.23295846.
 - `docs/implementing.md` and `ZENODO-PUBLISHING-GUIDE.md`: package commands without angle-bracket placeholders (explicit `imm-core-v1.2.0.zip`), generated `__pycache__` excluded, archive built exactly from the accepted state; the general release flow (reserve DOI, fix metadata, then build the archive) uses 1.2.0 consistently and the v1.0/v1.1.0 checklists are marked historical. No release executed.
 - Naming: `CITATION.cff`, `.zenodo.json`, `docs/README.md` and `profiles/luxoh-cmdi.md` refer to the institutional predecessor model instead of its former name; file names and URLs are unchanged.
 
@@ -60,7 +66,7 @@ Intended release: 1.2.0 (MINOR): one new optional field (`languages`); no field 
 
 Zenodo: https://doi.org/10.5281/zenodo.23190815 (this version); all versions: https://doi.org/10.5281/zenodo.20507328.
 
-Consistency and correctness fixes. One optional field is added (`governance_ref`). No field is removed or renamed. The schema now enforces that required strings and `keywords` entries are non-empty, that `interview_date` has the form YYYY-MM-DD also in validators without format checking, and that `withdrawn` implies `accessRights: closed`. Records that relied on an empty required string, an empty `keywords` entry, `withdrawn` without `closed`, or (in validators without format checking) another date form validated against the published v1.0 schema and no longer do. `tests/invalid/empty-title.json` and `tests/invalid/withdrawn-not-closed.json` document the empty-string and withdrawal cases; the fixtures for the empty-keyword and date-form cases (`tests/invalid/keywords-empty-item.json`, `tests/invalid/date-wrong-shape.json`) were added after the release (see Unreleased).
+Consistency and correctness fixes. One optional field is added (`governance_ref`). No field is removed or renamed. The schema now enforces that required strings and `keywords` entries are non-empty, that `interview_date` has the form YYYY-MM-DD also in validators without format checking, and that `withdrawn` implies `accessRights: closed`. Records that relied on an empty required string, an empty `keywords` entry, `withdrawn` without `closed`, or (in validators without format checking) another date form validated against the published v1.0 schema and no longer do. `tests/invalid/empty-title.json` and `tests/invalid/withdrawn-not-closed.json` document the empty-string and withdrawal cases; the fixtures for the empty-keyword and date-form cases (`tests/invalid/keywords-empty-item.json`, `tests/invalid/date-wrong-shape.json`) were added after the release (see 1.2.0).
 
 ### Added
 

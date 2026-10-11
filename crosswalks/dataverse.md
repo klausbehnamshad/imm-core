@@ -1,6 +1,6 @@
 # Crosswalk: IMM-Core → Dataverse (citation block)
 
-**IMM-Core version:** 1.2.0 (unreleased)  
+**IMM-Core version:** 1.2.0  
 **Standard:** Dataverse citation metadata block — `scripts/api/data/metadatablocks/citation.tsv` in IQSS/dataverse, commit `cc6e62e3354492ad1f4127adc64eb22445319b95` (SHA-256 `21495ad4f4f917b1713d58fa5b81ca037df58cbf0d1d150cce856aa80d1ef82a`). The concrete instance can differ; check its version, licences, active blocks and granularity before any real deposit (a separate task, not this release).
 
 ---

@@ -1,6 +1,6 @@
 # Crosswalk: IMM-Core → Dublin Core Terms
 
-**IMM-Core version:** 1.2.0 (unreleased)  
+**IMM-Core version:** 1.2.0  
 **Standard:** Dublin Core Metadata Terms (DCTERMS) — https://www.dublincore.org/specifications/dublin-core/dcmi-terms/
 
 ---

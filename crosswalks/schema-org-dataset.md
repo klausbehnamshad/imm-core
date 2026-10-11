@@ -1,6 +1,6 @@
 # Crosswalk: IMM-Core → Schema.org/Dataset
 
-**IMM-Core version:** 1.2.0 (unreleased)  
+**IMM-Core version:** 1.2.0  
 **Standard:** Schema.org `Dataset` type — https://schema.org/Dataset
 
 ---

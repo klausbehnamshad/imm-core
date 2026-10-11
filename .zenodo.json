@@ -2,9 +2,10 @@
   "title": "IMM-Core: Interview Metadata Model — Core Profile",
   "description": "A generic, openly published minimal metadata model for interview-based qualitative research. Discipline-agnostic (oral history, sociology, anthropology, education, migration studies, health research). Two-layer architecture: Core Profile (generic, 15 fields in blocks A–C; Block D reserved for profiles) plus Implementation Profiles (specialisations). Includes DCTAP single source of truth, JSON Schema validator, offline record checker and Dataverse converter, three example records, four crosswalks (Dublin Core, REFI-QDA/QDPX, Schema.org/Dataset, Dataverse), one worked reference profile, and full conceptual documentation.",
   "license": "cc-by-4.0",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "upload_type": "dataset",
-  "publication_date": "2026-10-06",
+  "publication_date": "2026-10-11",
+  "doi": "10.5281/zenodo.23295846",
   "creators": [
     {
       "name": "Behnam Shad, Klaus",

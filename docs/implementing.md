@@ -123,21 +123,17 @@ and the existing licence notes, including the bundled Dataverse source
 licence `tools/data/LICENSE-dataverse.md`:
 
 ```bash
-zip -r imm-core-v1.2.0.zip \
+git archive --format=zip --output=imm-core-v1.2.0.zip v1.2.0 \
   README.md LICENSE CITATION.cff CHANGELOG.md \
   tap/core.csv schema/core.schema.json \
-  vocabs/ profiles/ crosswalks/ \
+  vocabs profiles crosswalks \
   examples/core-generic.json examples/core-oral-history.json examples/core-minimal.json \
-  methodological-positions/ docs/ \
-  tools/ scripts/ tests/ \
-  -x '*/__pycache__/*'
+  methodological-positions docs tools scripts tests
 ```
 
-Build the archive exactly from the accepted Git state, never from a
-working tree with generated files; generated `__pycache__` directories
-stay out of the bundle. `.zenodo.json` and the publishing guide stay
-out of the bundle. The detailed release steps (reserve the DOI before
-freezing the source state, fix the metadata before building the
-archive, version field, dates, tag) are in
-`ZENODO-PUBLISHING-GUIDE.md`; the release itself is a separate task
-and is not executed here.
+`git archive` reads committed files only, so generated `__pycache__`
+directories never enter the bundle. `.zenodo.json`, the publishing
+guide, `.github/` and `.gitignore` stay out of the bundle. The release
+steps (reserve the DOI, set the metadata in one release commit, build
+the archive from that commit, CI, tag, upload) are in
+`ZENODO-PUBLISHING-GUIDE.md`.

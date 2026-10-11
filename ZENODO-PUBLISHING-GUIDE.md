@@ -2,40 +2,43 @@
 
 **Concept DOI (all versions):** https://doi.org/10.5281/zenodo.20507328
 
-**Status:** v1.0 published 2026-06-02 (10.5281/zenodo.20507329); 1.1.0 published 2026-10-06 (10.5281/zenodo.23190815). 1.2.0 is unreleased. This guide reserves no new DOI and executes no release; it only describes the steps.
+**Status:** v1.0 published 2026-06-02 (10.5281/zenodo.20507329); 1.1.0 published 2026-10-06 (10.5281/zenodo.23190815); 1.2.0 with version DOI 10.5281/zenodo.23295846 and publication date 2026-10-11.
 
 ---
 
-## Publishing 1.2.0 (current procedure; no release executed here)
+## Publishing a new version (procedure used for 1.2.0)
 
-1. Create the version draft once: open the published 1.1.0 record at https://zenodo.org and click **New version**. Reserve the DOI shown in that draft. Carry out every step below in this same draft; never create a second draft afterwards.
-2. Set the final metadata on the release branch: version `1.2.0`, the concept DOI and the reserved version DOI in `CITATION.cff`, `.zenodo.json` and `CHANGELOG.md`; bring `README.md` and `docs/` to the release state.
-3. Merge the release branch into `main`; CI must be green. Record the accepted source commit hash.
-4. Build the bundle exactly from that accepted commit (check it out first):
+1. **Draft and DOI.** Open the published previous record on https://zenodo.org and click **New version**. Under "Do you already have a DOI?" choose **No** and click **Get a DOI now!**. Do not import files from the previous version. Click **Save draft**. Use this one draft for every later step.
+2. **Release commit.** On the release branch, after all accepted changes, set version, publication date and the reserved version DOI in `CITATION.cff`, `.zenodo.json`, `CHANGELOG.md`, `README.md`, `docs/README.md` and the crosswalk heads. Commit once, signed, and record the commit:
 
 ```bash
-zip -r imm-core-v1.2.0.zip \
-  README.md LICENSE CITATION.cff CHANGELOG.md \
-  tap/core.csv schema/core.schema.json \
-  vocabs/ profiles/ crosswalks/ \
-  examples/core-generic.json examples/core-oral-history.json examples/core-minimal.json \
-  methodological-positions/ docs/ \
-  tools/ scripts/ tests/ \
-  -x '*/__pycache__/*'
+IMM_RELEASE_COMMIT=$(git rev-parse HEAD)
 ```
 
-The bundle carries `tools/data/LICENSE-dataverse.md` (the Dataverse
-source licence) inside `tools/`. Generated `__pycache__` directories
-stay out.
+3. **Checks** on that commit: `python scripts/check_consistency.py`, `python tools/validate.py --self-test`, `python tools/imm2dataverse.py --self-test`, `python -m unittest discover -s tests/tools`, ajv on `examples/*.json`.
+4. **Bundle** from that commit only:
 
-**Excluded** (do not upload): `.zenodo.json`, `ZENODO-PUBLISHING-GUIDE.md`, `.github/`.
+```bash
+git archive --format=zip --output=imm-core-v1.2.0.zip "$IMM_RELEASE_COMMIT" \
+  README.md LICENSE CITATION.cff CHANGELOG.md \
+  tap/core.csv schema/core.schema.json \
+  vocabs profiles crosswalks \
+  examples/core-generic.json examples/core-oral-history.json examples/core-minimal.json \
+  methodological-positions docs tools scripts tests
+shasum -a 256 imm-core-v1.2.0.zip
+```
 
-5. Upload `imm-core-v1.2.0.zip` to the same draft from step 1. Optionally also upload these three files individually alongside the zip (makes them directly browsable without unzipping):
-   - `tap/core.csv`
-   - `schema/core.schema.json`
-   - `docs/README.md`
+The bundle carries `tools/data/LICENSE-dataverse.md` (the Dataverse source licence). **Excluded** (do not upload): `.zenodo.json`, `ZENODO-PUBLISHING-GUIDE.md`, `.github/`, `.gitignore`.
 
-   Fill in the metadata form from `.zenodo.json`:
+5. **CI before the tag.** Push the release branch and wait until CI is green for `IMM_RELEASE_COMMIT`.
+6. **Main and tag.** Fast-forward `main` to the same commit, then tag and push both together; wait for green CI on `main`:
+
+```bash
+git tag -a v1.2.0 "$IMM_RELEASE_COMMIT" -m "IMM-Core v1.2.0"
+git push --atomic origin main refs/tags/v1.2.0
+```
+
+7. **Upload and form.** Upload `imm-core-v1.2.0.zip` to the draft from step 1. The DOI stays in the Zenodo-generated (reserved) mode; do not enter it as an existing external DOI. Fill in the form from `.zenodo.json`:
 
 | Field | Value |
 |---|---|
@@ -44,36 +47,22 @@ stay out.
 | **Authors** | Behnam Shad, Klaus · ORCID `0000-0002-3601-9024` · C²DH, University of Luxembourg |
 | **Description** | Paste the `description` value from `.zenodo.json` |
 | **License** | Creative Commons Attribution 4.0 International |
-| **Version** | type 1.2.0 into the Version field (the value in .zenodo.json) |
-| **Publication date** | today |
+| **Version** | the value in `.zenodo.json` |
+| **Publication date** | the date set in step 2 |
 | **Keywords** | interview metadata; qualitative research; oral history; metadata model; FAIR data; GDPR; DCTAP; JSON Schema; Dublin Core; REFI-QDA; QDPX; schema.org; minimal metadata; research data management |
 | **Notes** | DCTAP-as-SSoT: tap/core.csv is authoritative; schema/core.schema.json is a derived artefact. Working repository: https://github.com/klausbehnamshad/imm-core |
 
-   **Communities** — apply via the Communities tab (applications are reviewed; approval can happen post-publication):
-   - `dariah`
-   - `clarin`
+   **Communities:** apply for `dariah` and `clarin` via the Communities tab; approval can come after publication.
 
-   Check that the draft shows the reserved DOI from step 1 before publishing.
-
-6. Click **Preview** — confirm the DOI shown is the reserved DOI from step 1. Confirm author name, ORCID, and affiliation. Click **Publish**. The record is now live and immutable.
-
-7. Tag the release on the archived source state:
-
-```bash
-git tag -a v1.2.0 <commit-hash-from-step-3> -m "IMM-Core v1.2.0"
-```
-
-   Record later publication dates in a follow-up commit on `main`; that commit neither moves the tag nor changes any archived file. No change to archived files is a prerequisite for this tag.
+8. **Preview and publish.** Confirm DOI, author, ORCID, affiliation, licence, version, date and the single ZIP. Click **Publish**. Download the public ZIP and compare its SHA-256 with step 4. Tag and files are not changed afterwards.
 
 > **Post-publication corrections:** Zenodo lets you edit metadata (title, description, keywords) without creating a new version — use **Edit** on the published record. To change files, you must create a new version (new DOI). The original version and its DOI are always preserved.
-
-No release is executed as part of this guide update; no new DOI is reserved here.
 
 ---
 
 ## History: v1.0 (published 2026-06-02, record only)
 
-The steps below are the closed v1.0 record. For 1.2.0 follow "Publishing 1.2.0" above.
+The steps below are the closed v1.0 record. For new versions follow "Publishing a new version" above.
 
 ### Step 1 — Create draft deposit and reserve DOI *(v1.0, done)*
 
@@ -99,7 +88,7 @@ Bundle built from the accepted v1.0 state (same file list as in step 4 above, wi
 
 ### Step 5 — Fill in the metadata form *(v1.0, done)*
 
-Form filled from `.zenodo.json` (same fields as in step 5 above, with version 1.0).
+Form filled from `.zenodo.json` (same fields as in step 7 above, with version 1.0).
 
 ### Step 6 — Preview and publish *(v1.0, done)*
 

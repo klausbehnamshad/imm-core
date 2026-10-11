@@ -1,6 +1,6 @@
 # Crosswalk: IMM-Core ↔ REFI-QDA / QDPX
 
-**IMM-Core version:** 1.2.0 (unreleased)  
+**IMM-Core version:** 1.2.0  
 **Standard:** REFI-QDA Project Exchange Format (QDPX) — https://www.qdasoftware.org/
 
 ---
