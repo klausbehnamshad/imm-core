@@ -35,6 +35,13 @@ Intended release: 1.2.0 (MINOR): one new optional field (`languages`); no field 
 - Tighter timecode (00–59) and blank-text checks can hold back faulty records that earlier validators accepted.
 - Raw schema validation does not enforce the cross-field `languages` rule; run `tools/validate.py`.
 
+### Tooling
+
+- `tools/validate.py`: record checker (schema plus rules R1–R8) with exit codes 0/1/2 and `--self-test`, which separates `tests/invalid/` (schema failures) from `tests/invalid-rules/` (rule-only failures, one rule per fixture). Unit tests in `tests/tools/` give a positive counterpart for every rule; CI runs the self-test.
+- `tools/imm2dataverse.py`: offline converter with `check`/`build`/`--self-test`. Pinned language table `tools/data/dataverse-languages.tsv` (7,915 rows from the pinned Dataverse citation definition), synthetic configuration `tools/examples/collection-OHX.toml`, Dataverse crosswalk `crosswalks/dataverse.md`, `docs/implementing.md`, converter tests and CI coverage. The release bundle now carries `tools/`, `tools/data/`, `scripts/`, `tests/` and `docs/` with the existing licence notes.
+- Converter hardening: the checked licence mode (exact `license` XOR `termsOfUse`) reaches the projection; whitespace or non-string leftovers fail with exit 2. Configuration, schema, language table and names list are read once and hashed from those same bytes. JSON, ZIP and `build.tsv` are staged fully and placed exclusively (`os.link`; an appeared target stops the run with exit 2 and keeps its bytes). Missing `export_record_id`/`export_interviewer` default to `false`; a non-string `record_id_pattern` is a configuration error. Related entries with query/fragment parts, invalid ports or user information are skipped and counted. Control characters in `record_id` stop the run before any output with a file-and-field diagnosis. `synthetic = false` needs at least one usable name entry; admitted URL paths are also checked percent-decoded. Several authors share one outer `author` compound; only a real ORCID bracket is removed (`Example Person (1939)` is kept).
+- `tools/validate.py`: rule R3 also detects serialized lists with surrounding whitespace (record file unchanged); a non-string `record_id_pattern` is a configuration error without traceback.
+
 ### Documentation
 
 - Citation metadata after the Zenodo publication of 1.1.0: `CITATION.cff` and the citation lines in `README.md` and `docs/README.md` cite version 1.1.0 (10.5281/zenodo.23190815); the concept DOI for all versions is 10.5281/zenodo.20507328. 10.5281/zenodo.20507329 is the DOI of version 1.0 and stays with it.
@@ -44,6 +51,9 @@ Intended release: 1.2.0 (MINOR): one new optional field (`languages`); no field 
 - `tap/core.csv` and `schema/core.schema.json`: `consent_status` description no longer calls the value a GDPR-based category (description only, no rule change).
 - Crosswalks: `governance_ref` is an internal reference and is omitted from Dublin Core and Schema.org exports; the Schema.org example uses a synthetic interviewer and an example.org address.
 - `ZENODO-PUBLISHING-GUIDE.md`: DOI roles, 30-day file correction window, version field, 1.1.0 checklist.
+- `tools/data/LICENSE-dataverse.md`: verbatim copy of the Dataverse source licence (IQSS/dataverse `LICENSE.md` at commit `cc6e62e3354492ad1f4127adc64eb22445319b95`, 192 lines, SHA-256 `194b865caa806471273cfccebabfcd8c5094297f0e31a5ab8ff2155c6f86f64c`); the language table header and the release packaging lists reference it. Own model and code licence unchanged (CC-BY-4.0).
+- `README.md` and `docs/README.md`: development marked as `1.2.0 (unreleased)`; citation and DOI of the last published version 1.1.0 named as such.
+- `docs/implementing.md` and `ZENODO-PUBLISHING-GUIDE.md`: package commands without angle-bracket placeholders (explicit `imm-core-v1.2.0.zip`), generated `__pycache__` excluded, archive built exactly from the accepted state; the general release flow (reserve DOI, fix metadata, then build the archive) uses 1.2.0 consistently and the v1.0/v1.1.0 checklists are marked historical. No release executed.
 - Naming: `CITATION.cff`, `.zenodo.json`, `docs/README.md` and `profiles/luxoh-cmdi.md` refer to the institutional predecessor model instead of its former name; file names and URLs are unchanged.
 
 ## [1.1.0] — 2026-10-06

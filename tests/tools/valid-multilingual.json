@@ -1,0 +1,35 @@
+{
+  "record_id": "2025-01-01_OHX_0001",
+  "interview_date": "2025-01-01",
+  "interviewer": "A. B.",
+  "title": "Interview on work and migration",
+  "consent_status": "public",
+  "accessRights": "open",
+  "language": "deu",
+  "languages": [
+    "deu",
+    "ltz"
+  ],
+  "spatial": "Esch-sur-Alzette",
+  "keywords": [
+    "work",
+    "migration"
+  ],
+  "abstract": "The narrator describes work and migration experiences in two languages.",
+  "timecoded_segments": [
+    {
+      "start": "00:00:00",
+      "end": "00:04:12",
+      "label": "Arrival and first job"
+    },
+    {
+      "start": "00:04:12",
+      "end": "00:59:59",
+      "label": "Working life"
+    }
+  ],
+  "related_materials": [
+    "https://doi.org/10.5555/imm-example-0001"
+  ],
+  "governance_ref": "urn:example:governance:synth-0001"
+}

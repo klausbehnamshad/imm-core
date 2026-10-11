@@ -14,5 +14,8 @@ jobs:
           python-version: "3.12"
       - run: pip install "jsonschema>=4.18"
       - run: python scripts/check_consistency.py
+      - run: python tools/validate.py --self-test
+      - run: python tools/imm2dataverse.py --self-test
+      - run: python -m json.tool .zenodo.json > /dev/null
       - name: README quick start still works
         run: npx --yes -p ajv-cli@5 -p ajv-formats@3 ajv validate -c ajv-formats -s schema/core.schema.json -d "examples/*.json"

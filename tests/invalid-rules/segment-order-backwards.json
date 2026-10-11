@@ -1,0 +1,21 @@
+{
+  "record_id": "2025-01-01_OHX_0001",
+  "interview_date": "2025-01-01",
+  "interviewer": "A. B.",
+  "title": "Interview on work",
+  "consent_status": "public",
+  "accessRights": "open",
+  "language": "eng",
+  "timecoded_segments": [
+    {
+      "start": "00:03:00",
+      "end": "00:08:00",
+      "label": "First part"
+    },
+    {
+      "start": "00:00:00",
+      "end": "00:02:00",
+      "label": "Second part"
+    }
+  ]
+}
